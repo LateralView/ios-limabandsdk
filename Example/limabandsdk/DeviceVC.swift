@@ -19,10 +19,19 @@ class DeviceVC: UIViewController
         LimaBandClient.shared.connect(
             device: bluetoothDevice) { (success, fitnessDevice) in
                 
-                if let fitnessDevice = fitnessDevice {
+                if let fitnessDevice = fitnessDevice
+                {
                     print("Connected to fitness device")
                     self.fitnessDevice = fitnessDevice
                 }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if let vc = segue.destination as? StepCountVC
+        {
+            vc.fitnessDevice = self.fitnessDevice
         }
     }
     

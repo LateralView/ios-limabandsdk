@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -98,6 +97,9 @@
                                         <state key="normal" title="Read Live Steps Values">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="azX-mm-Uba" kind="show" id="I4k-9v-HwG"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -119,6 +121,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nQC-4h-6dj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2193" y="302"/>
+        </scene>
+        <!--Live Step Count-->
+        <scene sceneID="WOT-xx-Bc8">
+            <objects>
+                <viewController id="azX-mm-Uba" customClass="StepCountVC" customModule="limabandsdk_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Gxu-cd-sJt"/>
+                        <viewControllerLayoutGuide type="bottom" id="tOi-Kg-vXg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UQy-OP-Un6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ODi-0L-TcQ">
+                                <rect key="frame" x="166" y="124" width="43" height="84"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ODi-0L-TcQ" firstAttribute="top" secondItem="Gxu-cd-sJt" secondAttribute="bottom" constant="60" id="d28-H0-Dg9"/>
+                            <constraint firstItem="ODi-0L-TcQ" firstAttribute="centerX" secondItem="UQy-OP-Un6" secondAttribute="centerX" id="hyz-pw-YeY"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Live Step Count" id="AZg-fm-yQi"/>
+                    <connections>
+                        <outlet property="stepCount" destination="ODi-0L-TcQ" id="zEV-NB-MsD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WAl-KN-3j1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3023" y="302"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ADH-Id-LLl">
