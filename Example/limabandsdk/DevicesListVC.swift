@@ -1,5 +1,5 @@
 //
-//  DevicesList.swift
+//  DevicesListVC.swift
 //  limabandsdk
 //
 //  Created by leandrinux on 04/26/2017.
@@ -9,7 +9,7 @@
 import UIKit
 import limabandsdk
 
-class DevicesList: UITableViewController {
+class DevicesListVC: UITableViewController {
     
     var devices = [BluetoothDevice]()
 
@@ -31,6 +31,20 @@ class DevicesList: UITableViewController {
                 self.devices = devices
                 self.tableView.reloadData()
             }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "toDevice"
+        {
+            guard
+                let vc = segue.destination as? DeviceVC,
+                let indexPath = tableView.indexPathForSelectedRow
+                else {
+                return
+            }
+            vc.bluetoothDevice = devices[indexPath.row]
         }
     }
     

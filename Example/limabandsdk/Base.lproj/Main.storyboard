@@ -6,13 +6,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Devices-->
         <scene sceneID="7hv-Vr-b2b">
             <objects>
-                <tableViewController id="Hxl-nB-1dF" customClass="DevicesList" customModule="limabandsdk_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Hxl-nB-1dF" customClass="DevicesListVC" customModule="limabandsdk_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ecq-Rl-ykD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -41,6 +42,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="aUU-4y-uNi" kind="show" identifier="toDevice" id="biy-pL-rPv"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -59,6 +63,62 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m58-vo-1iD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1387" y="302"/>
+        </scene>
+        <!--Device-->
+        <scene sceneID="bRU-ov-cli">
+            <objects>
+                <viewController id="aUU-4y-uNi" customClass="DeviceVC" customModule="limabandsdk_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0bj-KR-fGF"/>
+                        <viewControllerLayoutGuide type="bottom" id="cn2-OW-qtD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oMJ-Sy-eH5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="tCn-It-KKp">
+                                <rect key="frame" x="37.5" y="116" width="300" height="92"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r09-qi-qkL">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
+                                        <color key="backgroundColor" red="0.79215686269999996" green="0.79215686269999996" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="UcV-QR-FEi"/>
+                                        </constraints>
+                                        <state key="normal" title="Vibrate">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="doVibrate:" destination="aUU-4y-uNi" eventType="touchUpInside" id="BgS-4J-biF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yzd-mb-TZd">
+                                        <rect key="frame" x="0.0" y="52" width="300" height="40"/>
+                                        <color key="backgroundColor" red="0.79215686269999996" green="0.79215686269999996" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Read Live Steps Values">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Yzd-mb-TZd" firstAttribute="width" secondItem="r09-qi-qkL" secondAttribute="width" id="Inp-oz-s2J"/>
+                                    <constraint firstItem="Yzd-mb-TZd" firstAttribute="height" secondItem="r09-qi-qkL" secondAttribute="height" id="OeN-4S-ASp"/>
+                                    <constraint firstItem="r09-qi-qkL" firstAttribute="width" secondItem="tCn-It-KKp" secondAttribute="width" id="md3-hV-Ayg"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tCn-It-KKp" firstAttribute="top" secondItem="0bj-KR-fGF" secondAttribute="bottom" constant="52" id="4Gr-uP-5rM"/>
+                            <constraint firstItem="tCn-It-KKp" firstAttribute="width" secondItem="oMJ-Sy-eH5" secondAttribute="width" multiplier="0.8" id="QOT-Cg-T6z"/>
+                            <constraint firstItem="tCn-It-KKp" firstAttribute="centerX" secondItem="oMJ-Sy-eH5" secondAttribute="centerX" id="cFM-Pt-hl8"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Device" id="I61-mq-NDn"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nQC-4h-6dj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2193" y="302"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ADH-Id-LLl">

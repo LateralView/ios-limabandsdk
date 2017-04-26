@@ -9,32 +9,19 @@
 import Foundation
 import CoreBluetooth
 
-typealias OperationHandler = (_ success: Bool) -> Void
+public typealias OperationHandler = (_ success: Bool) -> Void
 
-enum FitnessDeviceOperationType {
-    case pair
-    case vibrate
-    case getDeviceInfo
-    case setUserInfo
-    case setDateTime
-    case getHistoryData
-    case getRealTimeStepValues
-    case getBatteryLevel
-}
-
-class FitnessDeviceOperation
+public class FitnessDeviceOperation
 {
+    public var verbose            = false
+    public var returnValue: Any?
+
     var fitnessDevice: FitnessDevice
-
-    var verbose            = false
-
+    var handler: OperationHandler!
+    
     var peripheral : CBPeripheral {
         return fitnessDevice.device.peripheral
     }
-    
-    var returnValue: Any?
-    
-    var handler: OperationHandler!
 
     init(fitnessDevice: FitnessDevice) {
         self.fitnessDevice = fitnessDevice
@@ -44,7 +31,7 @@ class FitnessDeviceOperation
     {
     }
     
-    func execute(handler: @escaping OperationHandler)
+    public func execute(handler: @escaping OperationHandler)
     {
         guard fitnessDevice.isConnected else {
             print("- Cannot perform action because it is disconnected")
@@ -55,7 +42,7 @@ class FitnessDeviceOperation
         self.handler = handler
     }
     
-    func cancel(handler: @escaping OperationHandler)
+    public func cancel(handler: @escaping OperationHandler)
     {
         self.handler = nil
     }
