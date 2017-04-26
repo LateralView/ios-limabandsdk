@@ -11,7 +11,7 @@ import CoreBluetooth
 
 typealias ServiceScanHandler = (Void) -> Void
 
-class FitnessDevice: NSObject, CBPeripheralDelegate
+public class FitnessDevice: NSObject, CBPeripheralDelegate
 {
     var device      : BluetoothDevice
     var operations  = [FitnessDeviceOperationType: FitnessDeviceOperation]()
@@ -61,7 +61,7 @@ class FitnessDevice: NSObject, CBPeripheralDelegate
     
     // MARK: - CBPeripheralDelegate
     
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?)
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?)
     {
         if let services = peripheral.services {
             remainingServicesToScan = services.count
@@ -71,7 +71,7 @@ class FitnessDevice: NSObject, CBPeripheralDelegate
         }
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?)
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?)
     {
         remainingServicesToScan = remainingServicesToScan - 1
         if (remainingServicesToScan == 0) {
@@ -83,7 +83,7 @@ class FitnessDevice: NSObject, CBPeripheralDelegate
         }
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?)
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?)
     {
         guard let value = characteristic.value else {
             return

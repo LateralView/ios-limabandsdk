@@ -8,13 +8,13 @@
 
 import Foundation
 
-typealias ScanHandler       = (_ success: Bool, _ devices: [BluetoothDevice]?) -> Void
-typealias ConnectHandler    = (_ success: Bool, _ fitnessDevice: FitnessDevice?) -> Void
+public typealias ScanHandler       = (_ success: Bool, _ devices: [BluetoothDevice]?) -> Void
+public typealias ConnectHandler    = (_ success: Bool, _ fitnessDevice: FitnessDevice?) -> Void
 
-class LimaBandClient: FitnessDeviceManagerDelegate
+public class LimaBandClient: FitnessDeviceManagerDelegate
 {
 
-    static let shared           = LimaBandClient()
+    public static let shared           = LimaBandClient()
     
     private var manager         : FitnessDeviceManager!
 
@@ -33,19 +33,22 @@ class LimaBandClient: FitnessDeviceManagerDelegate
     {
     }
 
-    func start()
+    public func start()
     {
         manager = FitnessDeviceManager()
         manager.delegate = self
     }
     
-    func scan(filterBySignalLevel: Bool, handler: @escaping ScanHandler)
+    public func scan(filterBySignalLevel: Bool, handler: @escaping ScanHandler)
     {
-        self.scanHandler = handler
-        manager.scan(filterBySignalLevel: filterBySignalLevel)
+        // wait some time until Bluetooth is ready
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.scanHandler = handler
+            self.manager.scan(filterBySignalLevel: filterBySignalLevel)
+        }
     }
     
-    func connect(device: BluetoothDevice, handler: @escaping ConnectHandler)
+    public func connect(device: BluetoothDevice, handler: @escaping ConnectHandler)
     {
         self.connectHandler = handler
         manager.connect(toDevice: device)

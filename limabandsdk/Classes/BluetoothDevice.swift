@@ -9,12 +9,13 @@
 import Foundation
 import CoreBluetooth
 
-class BluetoothDevice
+public class BluetoothDevice
 {
+    public var name     : String
+    public var rssi     : Int
+
     var centralManager  : CBCentralManager
     var peripheral      : CBPeripheral
-    var name            : String
-    var rssi            : Int
     
     var identifier      : String {
         return peripheral.identifier.uuidString
