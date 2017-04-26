@@ -1,0 +1,6 @@
+framework module limabandsdk {
+  umbrella header "limabandsdk-umbrella.h"
+
+  export *
+  module * { export * }
+}

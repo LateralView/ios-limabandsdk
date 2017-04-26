@@ -1,0 +1,22 @@
+{
+  "name": "limabandsdk",
+  "version": "0.1.0",
+  "summary": "A short description of limabandsdk.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/leandrinux/limabandsdk",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "leandrinux": "leandro@lateralview.net"
+  },
+  "source": {
+    "git": "https://github.com/leandrinux/limabandsdk.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "limabandsdk/Classes/**/*"
+}
