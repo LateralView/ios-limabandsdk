@@ -13,7 +13,6 @@ public typealias OperationHandler = (_ success: Bool) -> Void
 
 public class FitnessDeviceOperation
 {
-    public var verbose            = false
     public var returnValue: Any?
 
     var fitnessDevice: FitnessDevice

@@ -14,7 +14,8 @@ public typealias ConnectHandler    = (_ success: Bool, _ fitnessDevice: FitnessD
 public class LimaBandClient: FitnessDeviceManagerDelegate
 {
 
-    public static let shared           = LimaBandClient()
+    public static let shared    = LimaBandClient()
+    public static var verbose   = false
     
     private var manager         : FitnessDeviceManager!
 
@@ -31,6 +32,16 @@ public class LimaBandClient: FitnessDeviceManagerDelegate
     
     private init()
     {
+    }
+
+    static func log(_ text: String) {
+        if LimaBandClient.verbose {
+            print("[-] LimaBandClient: \(text)")
+        }
+    }
+
+    static func error(_ text: String) {
+        print("[X] LimaBandClient: \(text)")
     }
 
     public func start()

@@ -18,12 +18,12 @@ class MibandOperationVibrate: FitnessDeviceOperation
         super.execute(handler: handler)
         
         guard fitnessDevice.isConnected else {
-            print("- Cannot perform action because it is disconnected")
+            LimaBandClient.error("Cannot perform action because it is disconnected")
             handler(false)
             return;
         }
 
-        print("- Vibrating wristband")
+        LimaBandClient.log("Vibrating wristband")
         if let characteristic = self.characteristic(serviceUUID: serviceUUID, UUID: characteristicUUID)
         {
             let data = Data([0x04])

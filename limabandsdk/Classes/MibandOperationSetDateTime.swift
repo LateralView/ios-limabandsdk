@@ -27,12 +27,12 @@ class MibandOperationSetDateTime: FitnessDeviceOperation
         super.execute(handler: handler)
         
         guard fitnessDevice.isConnected else {
-            print("- Cannot perform action because it is disconnected")
+            LimaBandClient.error("Cannot perform action because it is disconnected")
             handler(false)
             return;
         }
 
-        print("- Setting date and time")
+        LimaBandClient.log("Setting date and time")
         if let characteristic = self.characteristic(serviceUUID: serviceUUID, UUID: characteristicUUID)
         {
             let packet = Date().toWristbandData()

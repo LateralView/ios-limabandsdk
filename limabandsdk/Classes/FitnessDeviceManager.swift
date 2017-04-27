@@ -42,18 +42,18 @@ class FitnessDeviceManager: NSObject, CBCentralManagerDelegate
     func scan(filterBySignalLevel: Bool)
     {
         guard centralManager.state == .poweredOn else {
-            print("- Cannot find wristbands, bluetooth is in state \(centralManager.state.rawValue)")
+            LimaBandClient.error("Cannot find wristbands, bluetooth is in state \(centralManager.state.rawValue)")
             return
         }
             
-        print ("- Wristband search started")
+        LimaBandClient.log("Wristband search started")
         scanResults = [BluetoothDevice]()
         self.filterBySignalLevel = filterBySignalLevel
         centralManager.scanForPeripherals(withServices: nil, options: nil)
         
         let dispatchTime = DispatchTime.now() + .seconds(5)
         DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
-            print ("- Wristband search stopped")
+            LimaBandClient.log("Wristband search stopped")
             self.centralManager.stopScan()
             self.delegate?.didFind(success: true, devices: self.scanResults)
         }
@@ -61,7 +61,7 @@ class FitnessDeviceManager: NSObject, CBCentralManagerDelegate
     
     func connect(toDevice device:BluetoothDevice)
     {
-        print("- Connecting to \(device.identifier)")
+        LimaBandClient.log("Connecting to \(device.identifier)")
         
         let connectionTimeout = 10
         
@@ -72,7 +72,7 @@ class FitnessDeviceManager: NSObject, CBCentralManagerDelegate
         let dispatchTime = DispatchTime.now() + .seconds(connectionTimeout)
         DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
             if (self.fitnessDevice == nil) {
-                print("- Failed to connect to \(device.identifier)")
+                LimaBandClient.error("Failed to connect to \(device.identifier)")
                 self.centralManager.cancelPeripheralConnection(device.peripheral)
                 self.fitnessDevice = nil
                 self.delegate?.didConnect(success: false, fitnessDevice: nil)
@@ -90,7 +90,7 @@ class FitnessDeviceManager: NSObject, CBCentralManagerDelegate
         }
 
         if (central.state != .poweredOn) && device.isConnected {
-            print("- Bluetooth turned off, peripheral was disconnected")
+            LimaBandClient.log("Bluetooth turned off, peripheral was disconnected")
             fitnessDevice?.isConnected = false
         }
     }
@@ -115,7 +115,7 @@ class FitnessDeviceManager: NSObject, CBCentralManagerDelegate
         let isValidDevice = (isConnectable == true) && isValidName && passesSignalFilter
         
         if isValidName && !passesSignalFilter {
-            print("Found \(peripheral.identifier.uuidString) but it is too far away (\(RSSI.doubleValue))")
+            LimaBandClient.log("Found \(peripheral.identifier.uuidString) but it is too far away (\(RSSI.doubleValue))")
         }
         
         if isValidDevice {
@@ -146,7 +146,7 @@ class FitnessDeviceManager: NSObject, CBCentralManagerDelegate
         {
             self.fitnessDevice = fitnessDevice
             fitnessDevice.isConnected = true
-            print("- Connected to \(peripheral.identifier)")
+            LimaBandClient.log("Connected to \(peripheral.identifier)")
             
             fitnessDevice.scanServices { success in
                 self.delegate?.didConnect(
@@ -165,7 +165,7 @@ class FitnessDeviceManager: NSObject, CBCentralManagerDelegate
         }
         
         if (peripheral == device.device.peripheral) && device.isConnected {
-            print("- Peripheral became disconnected")
+            LimaBandClient.log("Peripheral became disconnected")
             fitnessDevice?.isConnected = false
         }
     }

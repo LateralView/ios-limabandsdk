@@ -25,9 +25,9 @@ class DeviceVC: UIViewController
                 
                 if let fitnessDevice = fitnessDevice
                 {
-                    print("- Connected to fitness device, initializing")
+                    print("Connected to fitness device, initializing")
                     fitnessDevice.initialize {
-                        print("- Fitness device is connected and initialized.")
+                        print("Fitness device is connected and initialized.")
                         self.fitnessDevice = fitnessDevice
                         self.stackView.isUserInteractionEnabled = true
                         self.stackView.alpha = 1

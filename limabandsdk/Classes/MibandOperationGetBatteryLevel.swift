@@ -18,12 +18,10 @@ class MibandOperationGetBatteryLevel: FitnessDeviceOperation
         if fromCharacteristicUUID == characteristicUUID
         {
             let level : UInt8 = data.scanValue(start: 0, length: 1)
-            if verbose {
-                //        let timestamp = value.subdata(in: 1..<7)
-                let cycles : UInt16 = data.scanValue(start: 7, length: 2)
-                let status : UInt8 = data.scanValue(start: 9, length: 1)
-                print ("- Battery level:\(level), cycles:\(cycles), status:\(status)")
-            }
+
+            let cycles : UInt16 = data.scanValue(start: 7, length: 2)
+            let status : UInt8 = data.scanValue(start: 9, length: 1)
+            LimaBandClient.log("Battery level:\(level), cycles:\(cycles), status:\(status)")
             
             self.returnValue = Int(level)
 
@@ -37,12 +35,12 @@ class MibandOperationGetBatteryLevel: FitnessDeviceOperation
         super.execute(handler: handler)
 
         guard fitnessDevice.isConnected else {
-            print("- Cannot perform action because it is disconnected")
+            LimaBandClient.error("Cannot perform action because it is disconnected")
             handler(false)
             return;
         }
 
-        print("- Getting battery level")
+        LimaBandClient.log("Getting battery level")
         if let characteristic = self.characteristic(serviceUUID: serviceUUID, UUID: characteristicUUID)
         {
             peripheral.readValue(for: characteristic)

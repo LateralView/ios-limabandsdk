@@ -37,12 +37,12 @@ class MibandOperationGetActivityData: FitnessDeviceOperation
         super.execute(handler: handler)
 
         guard fitnessDevice.isConnected else {
-            print("- Cannot perform action because it is disconnected")
+            LimaBandClient.error("Cannot perform action because it is disconnected")
             handler(false)
             return;
         }
         
-        print("- Getting Activity Data")
+        LimaBandClient.log("Getting Activity Data")
         
         if let activityDataChar = self.characteristic(serviceUUID: serviceUUID, UUID: activityCharacteristicUUID),
             let controlPointChar = self.characteristic(serviceUUID: serviceUUID, UUID: controlPointCharacteristicUUID)
@@ -90,10 +90,6 @@ class MibandOperationGetActivityData: FitnessDeviceOperation
             }
         }
         
-        if verbose {
-            print (" - Started Activity data log block \(fixedDataUntilNextHeader) bytes remaining.")
-        }
-        
         // now we start a new block for this segment
         activityData = Data()
         activityDataReferenceDate = timestamp
@@ -105,10 +101,6 @@ class MibandOperationGetActivityData: FitnessDeviceOperation
             activityDataReferenceDate = nil
             if let summary = activityDataSummary {
                 
-                if verbose {
-                    print("Ended Activity Data log. Summary: \(summary)")
-                }
-                
                 self.returnValue = summary
                 self.handler?(true)
                 self.handler = nil
@@ -119,17 +111,17 @@ class MibandOperationGetActivityData: FitnessDeviceOperation
     func processActivityData(data: Data)
     {
         guard data.count % 3 == 0 else {
-            print("- Not a multiple of 3!")
+            LimaBandClient.error("Activity data block is not a multiple of 3!")
             return
         }
         
         guard activityDataSummary != nil else {
-            print("- Without an active summary!")
+            LimaBandClient.error("Without an active summary!")
             return
         }
         
         guard var timestamp = activityDataReferenceDate else {
-            print("- Without a current timestamp!")
+            LimaBandClient.error("Without a current timestamp!")
             return
         }
         
@@ -140,11 +132,7 @@ class MibandOperationGetActivityData: FitnessDeviceOperation
             //            let intensity : UInt8 = data.scanValue(start: i+1, length: 1)
             let steps : UInt8 = data.scanValue(start: i+2, length: 1)
             let dateString = timestamp.simple
-            
-            if verbose {
-                print(" - Activity log date: \(dateString), value: \(steps)")
-            }
-            
+                        
             let previousValue = activityDataSummary![dateString] ?? 0
             activityDataSummary![dateString] = previousValue + Int(steps)
             
@@ -156,7 +144,7 @@ class MibandOperationGetActivityData: FitnessDeviceOperation
     {
         if let controlPointChar = self.characteristic(serviceUUID: serviceUUID, UUID: controlPointCharacteristicUUID)
         {
-            print("- Sending ACK for date:\(date), byteCount:\(byteCount)")
+            LimaBandClient.log("Sending ACK for date:\(date), byteCount:\(byteCount)")
             var ackData = Data([0x0A])
             ackData.append(date.toWristbandData())
             ackData.append(Data([

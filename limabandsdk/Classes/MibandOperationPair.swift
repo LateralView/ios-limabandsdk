@@ -20,7 +20,7 @@ class MibandOperationPair: FitnessDeviceOperation
             // got a pairing notification response
             if data.elementsEqual([0x02]) {
                 // successful pairing
-                print("- Successfully paired")
+                LimaBandClient.log("Successfully paired")
                 self.handler?(true)
                 self.handler = nil
             }
@@ -32,12 +32,12 @@ class MibandOperationPair: FitnessDeviceOperation
         super.execute(handler: handler)
 
         guard fitnessDevice.isConnected else {
-            print("- Cannot perform action because it is disconnected")
+            LimaBandClient.error("Cannot perform action because it is disconnected")
             handler(false)
             return;
         }
 
-        print("- Asking for device pairing")
+        LimaBandClient.log("Asking for device pairing")
         
         if let characteristic = self.characteristic(serviceUUID: serviceUUID, UUID: characteristicUUID)
         {

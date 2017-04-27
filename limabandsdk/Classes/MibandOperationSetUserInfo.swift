@@ -20,28 +20,26 @@ class MibandOperationSetUserInfo: FitnessDeviceOperation
         {
             if (data.count > 0) {
                 
-                if verbose {
-                    let userID : UInt32 = data.scanValue(start: 0, length: 4)
-                    let isMale : UInt8 = data.scanValue(start: 4, length: 1)
-                    let age : UInt8 = data.scanValue(start: 5, length: 1)
-                    let height : UInt8 = data.scanValue(start: 6, length: 1)
-                    let weight : UInt8 = data.scanValue(start: 7, length: 1)
-                    let alias : UInt32 = data.scanValue(start: 8, length: 4)
-                    
-                    print("Get User Information Received: \(data)")
-                    print("\t User ID: \(userID)")
-                    print("\t Is Male: \(isMale)")
-                    print("\t Age: \(age)")
-                    print("\t Height: \(height)")
-                    print("\t Weight: \(weight)")
-                    print("\t Alias: \(alias)")
-                }
+                let userID : UInt32 = data.scanValue(start: 0, length: 4)
+                let isMale : UInt8 = data.scanValue(start: 4, length: 1)
+                let age : UInt8 = data.scanValue(start: 5, length: 1)
+                let height : UInt8 = data.scanValue(start: 6, length: 1)
+                let weight : UInt8 = data.scanValue(start: 7, length: 1)
+                let alias : UInt32 = data.scanValue(start: 8, length: 4)
+                
+                LimaBandClient.log("Get User Information Received: \(data)")
+                LimaBandClient.log("\t User ID: \(userID)")
+                LimaBandClient.log("\t Is Male: \(isMale)")
+                LimaBandClient.log("\t Age: \(age)")
+                LimaBandClient.log("\t Height: \(height)")
+                LimaBandClient.log("\t Weight: \(weight)")
+                LimaBandClient.log("\t Alias: \(alias)")
                 
                 self.handler?(true)
                 self.handler = nil
                 
             } else {
-                print("Get User Information Received: \(data)")
+                LimaBandClient.log("Get User Information Received: \(data)")
             }
             
         }
@@ -52,17 +50,17 @@ class MibandOperationSetUserInfo: FitnessDeviceOperation
         super.execute(handler: handler)
         
         guard fitnessDevice.isConnected else {
-            print("- Cannot perform action because it is disconnected")
+            LimaBandClient.error("Cannot perform action because it is disconnected")
             handler(false)
             return;
         }
 
         guard let userInfo = fitnessDevice.userInfo else {
-            print("- Before calling this operation you need to set FitnessDevice.userInfo")
+            LimaBandClient.error("Before calling this operation you need to set FitnessDevice.userInfo")
             return
         }
         
-        print("- Setting User Information")
+        LimaBandClient.log("Setting User Information")
         if let characteristic = self.characteristic(serviceUUID: serviceUUID, UUID: characteristicUUID)
         {
             let uid     = Data([0xf6, 0xe4, 0x63, 0x5c])
@@ -92,7 +90,7 @@ class MibandOperationSetUserInfo: FitnessDeviceOperation
     func calculateCRC(data: Data) -> UInt8
     {
         guard let addr = (fitnessDevice.deviceInfo as? MibandDeviceInfo)?.addressSuffix else {
-            print("Cannot calculate crc because address is not available. Miband requires GetDeviceInfo to be run before SetUserInfo")
+            LimaBandClient.error("Cannot calculate crc because address is not available. Miband requires GetDeviceInfo to be run before SetUserInfo")
             return 0
         }
         

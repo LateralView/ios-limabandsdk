@@ -52,12 +52,12 @@ public class FitnessDevice: NSObject, CBPeripheralDelegate
     func scanServices(_ handler: @escaping ServiceScanHandler)
     {
         guard device.peripheral.state == .connected else {
-            print("- Cannot scan because it is disconnected")
+            LimaBandClient.error("Cannot scan because it is disconnected")
             handler(false)
             return;
         }
         
-        print("- Scanning services for this device")
+        LimaBandClient.log("Scanning services for this device")
         self.serviceScanHandler = handler
         device.peripheral.discoverServices(nil)
     }
@@ -94,7 +94,7 @@ public class FitnessDevice: NSObject, CBPeripheralDelegate
         if (remainingServicesToScan == 0) {
             // scanning of services and characteristics has ended
             // we are ready to use the device
-            print("- Scan complete")
+            LimaBandClient.log("Scan complete")
             self.serviceScanHandler?(true)
             self.serviceScanHandler = nil
         }

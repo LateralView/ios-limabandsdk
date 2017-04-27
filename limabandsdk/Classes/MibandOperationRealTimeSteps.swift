@@ -19,9 +19,7 @@ class MibandOperationRealTimeSteps: FitnessDeviceOperation
         {
             // got a real time steps value
             let value : UInt32 = data.scanValue(start: 0, length: 4)
-            if verbose {
-                print(" - Real time steps value: \(value)")
-            }
+            LimaBandClient.log(" - Real time steps value: \(value)")
             self.returnValue = Int(value)
             self.handler?(true)
         }
@@ -32,12 +30,12 @@ class MibandOperationRealTimeSteps: FitnessDeviceOperation
         super.execute(handler: handler)
 
         guard fitnessDevice.isConnected else {
-            print("- Cannot perform action because it is disconnected")
+            LimaBandClient.error("Cannot perform action because it is disconnected")
             handler(false)
             return;
         }
 
-        print("- Starting monitoring of real time steps values")
+        LimaBandClient.log("Starting monitoring of real time steps values")
         if let characteristic = self.characteristic(serviceUUID: serviceUUID, UUID: characteristicUUID)
         {
             peripheral.setNotifyValue(true, for: characteristic)
@@ -53,7 +51,7 @@ class MibandOperationRealTimeSteps: FitnessDeviceOperation
             return;
         }
 
-        print("- Stopping monitoring of real time steps values")
+        LimaBandClient.log("Stopping monitoring of real time steps values")
         if let characteristic = self.characteristic(serviceUUID: serviceUUID, UUID: characteristicUUID)
         {
             peripheral.setNotifyValue(false, for: characteristic)
