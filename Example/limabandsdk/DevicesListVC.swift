@@ -59,8 +59,8 @@ class DevicesListVC: UITableViewController {
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let device = self.devices[indexPath.row]
-        cell.textLabel?.text = device.name
-        cell.detailTextLabel?.text = "RSSI: \(device.rssi)"
+        cell.textLabel?.text = "\(device.name) (RSSI: \(device.rssi))"
+        cell.detailTextLabel?.text = device.identifier
         return cell
     }
 
