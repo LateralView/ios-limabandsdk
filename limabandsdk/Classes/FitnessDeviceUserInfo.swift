@@ -8,16 +8,23 @@
 
 import Foundation
 
-enum UserInfoGender {
+public enum UserInfoGender {
     case male
     case female
 }
 
-class FitnessDeviceUserInfo
+public class FitnessDeviceUserInfo
 {
-    var gender      : UserInfoGender!
-    var birthDate   : Date!
-    var height      : Int!
-    var weight      : Int!
+    var gender      : UserInfoGender
+    var birthDate   : Date
+    var height      : Int
+    var weight      : Int
     
+    public init(gender: UserInfoGender, birthDate: Date, height: Int, weight: Int)
+    {
+        self.gender = gender
+        self.birthDate = birthDate
+        self.height = height
+        self.weight = weight
+    }
 }

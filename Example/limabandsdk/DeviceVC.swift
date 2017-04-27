@@ -42,4 +42,17 @@ class DeviceVC: UIViewController
         })
     }
     
+    @IBAction func doSetUserInfo(_ sender: Any)
+    {
+        fitnessDevice?.userInfo = FitnessDeviceUserInfo(
+            gender: .female,
+            birthDate: Date(),
+            height: 173,
+            weight: 73
+        )
+        
+        fitnessDevice?.setUserInfo.execute(handler: { (success) in
+            print("Did Set User Info")
+        })
+    }
 }

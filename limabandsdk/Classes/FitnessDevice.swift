@@ -13,10 +13,11 @@ typealias ServiceScanHandler = (Void) -> Void
 
 public class FitnessDevice: NSObject, CBPeripheralDelegate
 {
+    public var deviceInfo  : FitnessDeviceInfo?
+    public var userInfo    : FitnessDeviceUserInfo?
+
     var device      : BluetoothDevice
     var operations  = [FitnessDeviceOperationType: FitnessDeviceOperation]()
-    var deviceInfo  : FitnessDeviceInfo?
-    var userInfo    : FitnessDeviceUserInfo?
     
     var identifier : String {
         return device.identifier

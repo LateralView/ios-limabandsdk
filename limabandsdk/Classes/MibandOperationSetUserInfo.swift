@@ -61,9 +61,9 @@ class MibandOperationSetUserInfo: FitnessDeviceOperation
         {
             let uid     = Data([0xf6, 0xe4, 0x63, 0x5c])
             let gender  = Data([userInfo.gender == .male ? 1 : 0])
-            let age     = Data([UInt8(userInfo.birthDate!.yearsSince)])
-            let height  = Data([UInt8(userInfo.height!)])
-            let weight  = Data([UInt8(userInfo.weight!)])
+            let age     = Data([UInt8(userInfo.birthDate.yearsSince)])
+            let height  = Data([UInt8(userInfo.height)])
+            let weight  = Data([UInt8(userInfo.weight)])
             let type    = Data([0])
             let name    = Data([0x5, 0x0, 0x31, 0x35, 0x35, 0x30, 0x30, 0x35, 0x30, 0x35])
             
@@ -86,7 +86,7 @@ class MibandOperationSetUserInfo: FitnessDeviceOperation
     func calculateCRC(data: Data) -> UInt8
     {
         guard let addr = (fitnessDevice.deviceInfo as? MibandDeviceInfo)?.addressSuffix else {
-            print("Cannot calculate crc because address is not available")
+            print("Cannot calculate crc because address is not available. Miband requires GetDeviceInfo to be run before SetUserInfo")
             return 0
         }
         
