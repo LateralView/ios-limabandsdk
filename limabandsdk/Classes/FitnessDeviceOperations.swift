@@ -24,7 +24,13 @@ public extension FitnessDevice
     public var dummy : FitnessDeviceOperation {
         return FitnessDeviceDummyOperation(fitnessDevice: self)
     }
-        
+    
+    // not public because it shouldn't be called from outside the module
+    // pairing must be part of initialization
+    var pair : FitnessDeviceOperation {
+        return operations[.pair] ?? dummy
+    }
+
     public var vibrate : FitnessDeviceOperation {
         return operations[.vibrate] ?? dummy
     }

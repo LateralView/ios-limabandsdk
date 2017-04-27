@@ -11,7 +11,7 @@ import CoreBluetooth
 
 typealias ServiceScanHandler = (_ success: Bool) -> Void
 
-public typealias InitializeHandler = (Void) -> Void
+public typealias InitializeHandler = (_ success: Bool) -> Void
 
 public class FitnessDevice: NSObject, CBPeripheralDelegate
 {
@@ -64,7 +64,7 @@ public class FitnessDevice: NSObject, CBPeripheralDelegate
     
     public func initialize(_ handler: @escaping InitializeHandler)
     {
-        handler()
+        handler(true)
     }
     
     func disconnect()

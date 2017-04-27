@@ -31,10 +31,23 @@ class MibandDevice: FitnessDevice
     
     override func initialize(_ handler: @escaping InitializeHandler)
     {
-        if let op = self.operations[.pair] {
-            op.execute { (success) in
-                handler()
-            }            
+        // first perform pairing
+        self.pair.execute { (success) in
+            if success {
+                // then get device information
+                self.getDeviceInfo.execute(handler: { (success) in
+                    if success {
+                        // finally set user information
+                        self.setUserInfo.execute(handler: { (success) in
+                            handler(success)
+                        })
+                    } else {
+                        handler(false) // due to bad get device info
+                    }
+                })
+            } else {
+                handler(false) // due to bad pairing
+            }
         }
     }
     

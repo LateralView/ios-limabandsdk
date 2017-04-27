@@ -25,10 +25,23 @@ class DeviceVC: UIViewController
                 
                 if let fitnessDevice = fitnessDevice
                 {
+                    // Set User Info. This is important data about the user
+                    // that is required for initializing certain wristbands.
+                    fitnessDevice.userInfo = FitnessDeviceUserInfo(
+                        gender: .female,
+                        birthDate: Date(),
+                        height: 173,
+                        weight: 73
+                    )
+
                     print("Connected to fitness device, initializing")
-                    fitnessDevice.initialize {
-                        print("Fitness device is connected and initialized.")
-                        self.fitnessDevice = fitnessDevice
+                    fitnessDevice.initialize { success in
+                        if (success) {
+                            print("Fitness device is connected and initialized.")
+                            self.fitnessDevice = fitnessDevice
+                        } else {
+                            print("Failed to initialize fitness device")
+                        }
                         self.stackView.isUserInteractionEnabled = true
                         self.stackView.alpha = 1
                     }
@@ -91,13 +104,6 @@ class DeviceVC: UIViewController
     
     @IBAction func doSetUserInfo(_ sender: Any)
     {
-        fitnessDevice?.userInfo = FitnessDeviceUserInfo(
-            gender: .female,
-            birthDate: Date(),
-            height: 173,
-            weight: 73
-        )
-        
         fitnessDevice?.setUserInfo.execute(handler: { (success) in
             if success {
                 print("User Information has been set successfully")
