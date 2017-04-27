@@ -16,6 +16,7 @@
 		833349FC1EB258960060E0EC /* HistoryDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833349FB1EB258950060E0EC /* HistoryDataVC.swift */; };
 		836167A31EB138A2005DF8BE /* DeviceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836167A21EB138A2005DF8BE /* DeviceVC.swift */; };
 		83AE637F1EB13C3100BAF4E6 /* StepCountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AE637E1EB13C3100BAF4E6 /* StepCountVC.swift */; };
+		83FF5A921EB26F2700045B30 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FF5A911EB26F2700045B30 /* Extensions.swift */; };
 		8BF22B54E78BF00AE3775AC0 /* Pods_limabandsdk_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6609E2D9F08B617556139D6 /* Pods_limabandsdk_Tests.framework */; };
 		FEB255CEA9957CEE1A1AFD26 /* Pods_limabandsdk_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F7F7F3696FB8549AF3700F /* Pods_limabandsdk_Example.framework */; };
 /* End PBXBuildFile section */
@@ -47,6 +48,7 @@
 		833349FB1EB258950060E0EC /* HistoryDataVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryDataVC.swift; sourceTree = "<group>"; };
 		836167A21EB138A2005DF8BE /* DeviceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceVC.swift; sourceTree = "<group>"; };
 		83AE637E1EB13C3100BAF4E6 /* StepCountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepCountVC.swift; sourceTree = "<group>"; };
+		83FF5A911EB26F2700045B30 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		92F151B55A5F8A78D0E352E3 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		9B8BACE690E342738392CC08 /* Pods-limabandsdk_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-limabandsdk_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-limabandsdk_Example/Pods-limabandsdk_Example.release.xcconfig"; sourceTree = "<group>"; };
 		AF68975489B465D51F20F0DF /* limabandsdk.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = limabandsdk.podspec; path = ../limabandsdk.podspec; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				836167A21EB138A2005DF8BE /* DeviceVC.swift */,
 				833349FB1EB258950060E0EC /* HistoryDataVC.swift */,
 				83AE637E1EB13C3100BAF4E6 /* StepCountVC.swift */,
+				83FF5A911EB26F2700045B30 /* Extensions.swift */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
@@ -373,6 +376,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD81AFB9204008FA782 /* DevicesListVC.swift in Sources */,
+				83FF5A921EB26F2700045B30 /* Extensions.swift in Sources */,
 				836167A31EB138A2005DF8BE /* DeviceVC.swift in Sources */,
 				83AE637F1EB13C3100BAF4E6 /* StepCountVC.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,

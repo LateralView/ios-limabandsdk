@@ -65,7 +65,7 @@ class DeviceVC: UIViewController
     {
         fitnessDevice?.vibrate.execute(handler: { (success) in
             if success {
-                print("Wristband just vibrated!")
+                self.alert("Wristband should be vibrating right now")
             }
         })
     }
@@ -74,7 +74,7 @@ class DeviceVC: UIViewController
     {
         fitnessDevice?.getDeviceInfo.execute(handler: { (success) in
             if success {
-                print("Got device info successfully")
+                self.alert("Got device info successfully")
             }
         })
     }
@@ -83,7 +83,7 @@ class DeviceVC: UIViewController
     {
         fitnessDevice?.setDateTime.execute(handler: { (success) in
             if (success) {
-                print ("Did set date and time successfully")
+                self.alert("Date and time set successfully")
             }
         })
     }
@@ -97,7 +97,7 @@ class DeviceVC: UIViewController
                 guard let batteryLevel = op.returnInt else {
                     return
                 }
-                print ("Battery level is \(batteryLevel)")
+                self.alert("Battery level is \(batteryLevel)")
             })
         }
     }
@@ -106,7 +106,7 @@ class DeviceVC: UIViewController
     {
         fitnessDevice?.setUserInfo.execute(handler: { (success) in
             if success {
-                print("User Information has been set successfully")
+                self.alert("User Information has been set successfully")
             }
         })
     }
