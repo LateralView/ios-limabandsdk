@@ -11,11 +11,15 @@ import limabandsdk
 
 class DeviceVC: UIViewController
 {
+    @IBOutlet weak var stackView: UIStackView!
+
     var bluetoothDevice: BluetoothDevice!
     var fitnessDevice: FitnessDevice?
     
     override func viewDidLoad()
     {
+        stackView.isUserInteractionEnabled = false
+        stackView.alpha = 0.3
         LimaBandClient.shared.connect(
             device: bluetoothDevice) { (success, fitnessDevice) in
                 
@@ -23,6 +27,8 @@ class DeviceVC: UIViewController
                 {
                     print("- Connected to fitness device")
                     self.fitnessDevice = fitnessDevice
+                    self.stackView.isUserInteractionEnabled = true
+                    self.stackView.alpha = 1
                 }
         }
     }

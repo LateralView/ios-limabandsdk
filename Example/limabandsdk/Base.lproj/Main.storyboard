@@ -141,6 +141,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Device" id="I61-mq-NDn"/>
+                    <connections>
+                        <outlet property="stackView" destination="tCn-It-KKp" id="KSJ-DR-b6l"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nQC-4h-6dj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
