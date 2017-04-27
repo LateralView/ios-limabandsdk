@@ -148,7 +148,7 @@ class FitnessDeviceManager: NSObject, CBCentralManagerDelegate
             fitnessDevice.isConnected = true
             print("- Connected to \(peripheral.identifier)")
             
-            fitnessDevice.scan { success in
+            fitnessDevice.scanServices { success in
                 self.delegate?.didConnect(
                     success: success,
                     fitnessDevice: fitnessDevice

@@ -11,6 +11,8 @@ import CoreBluetooth
 
 typealias ServiceScanHandler = (_ success: Bool) -> Void
 
+public typealias InitializeHandler = (Void) -> Void
+
 public class FitnessDevice: NSObject, CBPeripheralDelegate
 {
     public var deviceInfo  : FitnessDeviceInfo?
@@ -47,7 +49,7 @@ public class FitnessDevice: NSObject, CBPeripheralDelegate
         device.peripheral.delegate = self
     }
     
-    func scan(_ handler: @escaping ServiceScanHandler)
+    func scanServices(_ handler: @escaping ServiceScanHandler)
     {
         guard device.peripheral.state == .connected else {
             print("- Cannot scan because it is disconnected")
@@ -58,6 +60,11 @@ public class FitnessDevice: NSObject, CBPeripheralDelegate
         print("- Scanning services for this device")
         self.serviceScanHandler = handler
         device.peripheral.discoverServices(nil)
+    }
+    
+    public func initialize(_ handler: @escaping InitializeHandler)
+    {
+        handler()
     }
     
     func disconnect()

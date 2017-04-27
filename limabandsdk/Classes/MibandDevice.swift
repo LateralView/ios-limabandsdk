@@ -29,5 +29,13 @@ class MibandDevice: FitnessDevice
         self.operations[.getBatteryLevel] = MibandOperationGetBatteryLevel(fitnessDevice: self)
     }
     
+    override func initialize(_ handler: @escaping InitializeHandler)
+    {
+        if let op = self.operations[.pair] {
+            op.execute { (success) in
+                handler()
+            }            
+        }
+    }
     
 }

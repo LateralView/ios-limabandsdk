@@ -24,11 +24,7 @@ public extension FitnessDevice
     public var dummy : FitnessDeviceOperation {
         return FitnessDeviceDummyOperation(fitnessDevice: self)
     }
-    
-    public var pair : FitnessDeviceOperation {
-        return operations[.pair] ?? dummy
-    }
-    
+        
     public var vibrate : FitnessDeviceOperation {
         return operations[.vibrate] ?? dummy
     }
