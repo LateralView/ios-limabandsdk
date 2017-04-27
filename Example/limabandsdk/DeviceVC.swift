@@ -42,6 +42,15 @@ class DeviceVC: UIViewController
         })
     }
     
+    @IBAction func doGetDeviceInfo(_ sender: Any)
+    {
+        fitnessDevice?.getDeviceInfo.execute(handler: { (success) in
+            if success {
+                print("Got device info successfully")
+            }
+        })
+    }
+    
     @IBAction func doSetUserInfo(_ sender: Any)
     {
         fitnessDevice?.userInfo = FitnessDeviceUserInfo(

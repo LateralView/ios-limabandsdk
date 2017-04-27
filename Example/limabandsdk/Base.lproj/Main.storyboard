@@ -76,7 +76,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="tCn-It-KKp">
-                                <rect key="frame" x="37.5" y="116" width="300" height="144"/>
+                                <rect key="frame" x="37.5" y="116" width="300" height="196"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r09-qi-qkL">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
@@ -104,18 +104,30 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gd8-Od-GrI">
                                         <rect key="frame" x="0.0" y="104" width="300" height="40"/>
                                         <color key="backgroundColor" red="0.79215686269999996" green="0.79215686269999996" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Get Device Info">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="doGetDeviceInfo:" destination="aUU-4y-uNi" eventType="touchUpInside" id="DWj-QP-iQg"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8tj-ej-EGb">
+                                        <rect key="frame" x="0.0" y="156" width="300" height="40"/>
+                                        <color key="backgroundColor" red="0.79215686269999996" green="0.79215686269999996" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Set User Info">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="doSetUserInfo:" destination="aUU-4y-uNi" eventType="touchUpInside" id="M8L-yP-niu"/>
+                                            <action selector="doSetUserInfo:" destination="aUU-4y-uNi" eventType="touchUpInside" id="fhf-wW-Hj2"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="8tj-ej-EGb" firstAttribute="height" secondItem="gd8-Od-GrI" secondAttribute="height" id="0Tt-2H-hel"/>
                                     <constraint firstItem="Yzd-mb-TZd" firstAttribute="width" secondItem="r09-qi-qkL" secondAttribute="width" id="Inp-oz-s2J"/>
                                     <constraint firstItem="Yzd-mb-TZd" firstAttribute="height" secondItem="r09-qi-qkL" secondAttribute="height" id="OeN-4S-ASp"/>
                                     <constraint firstItem="gd8-Od-GrI" firstAttribute="width" secondItem="Yzd-mb-TZd" secondAttribute="width" id="RaU-OS-lWI"/>
+                                    <constraint firstItem="8tj-ej-EGb" firstAttribute="width" secondItem="gd8-Od-GrI" secondAttribute="width" id="ZJF-DE-ywb"/>
                                     <constraint firstItem="gd8-Od-GrI" firstAttribute="height" secondItem="Yzd-mb-TZd" secondAttribute="height" id="eJ7-Pv-fZE"/>
                                     <constraint firstItem="r09-qi-qkL" firstAttribute="width" secondItem="tCn-It-KKp" secondAttribute="width" id="md3-hV-Ayg"/>
                                 </constraints>
