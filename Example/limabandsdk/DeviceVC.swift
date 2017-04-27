@@ -42,6 +42,10 @@ class DeviceVC: UIViewController
         {
             vc.fitnessDevice = self.fitnessDevice
         }
+        else if let vc = segue.destination as? HistoryDataVC
+        {
+            vc.fitnessDevice = self.fitnessDevice
+        }
     }
     
     @IBAction func doVibrate(_ sender: Any)

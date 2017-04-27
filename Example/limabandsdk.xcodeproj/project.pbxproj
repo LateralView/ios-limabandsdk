@@ -13,6 +13,7 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		833349FC1EB258960060E0EC /* HistoryDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833349FB1EB258950060E0EC /* HistoryDataVC.swift */; };
 		836167A31EB138A2005DF8BE /* DeviceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836167A21EB138A2005DF8BE /* DeviceVC.swift */; };
 		83AE637F1EB13C3100BAF4E6 /* StepCountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AE637E1EB13C3100BAF4E6 /* StepCountVC.swift */; };
 		8BF22B54E78BF00AE3775AC0 /* Pods_limabandsdk_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6609E2D9F08B617556139D6 /* Pods_limabandsdk_Tests.framework */; };
@@ -43,6 +44,7 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		677C451968982F77607D75F4 /* Pods-limabandsdk_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-limabandsdk_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-limabandsdk_Tests/Pods-limabandsdk_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		833349FB1EB258950060E0EC /* HistoryDataVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryDataVC.swift; sourceTree = "<group>"; };
 		836167A21EB138A2005DF8BE /* DeviceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceVC.swift; sourceTree = "<group>"; };
 		83AE637E1EB13C3100BAF4E6 /* StepCountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepCountVC.swift; sourceTree = "<group>"; };
 		92F151B55A5F8A78D0E352E3 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				607FACD71AFB9204008FA782 /* DevicesListVC.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				836167A21EB138A2005DF8BE /* DeviceVC.swift */,
+				833349FB1EB258950060E0EC /* HistoryDataVC.swift */,
 				83AE637E1EB13C3100BAF4E6 /* StepCountVC.swift */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -373,6 +376,7 @@
 				836167A31EB138A2005DF8BE /* DeviceVC.swift in Sources */,
 				83AE637F1EB13C3100BAF4E6 /* StepCountVC.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				833349FC1EB258960060E0EC /* HistoryDataVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

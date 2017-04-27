@@ -76,7 +76,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="tCn-It-KKp">
-                                <rect key="frame" x="37.5" y="116" width="300" height="300"/>
+                                <rect key="frame" x="37.5" y="116" width="300" height="352"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r09-qi-qkL">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
@@ -141,10 +141,21 @@
                                             <action selector="doGetBatteryLevel:" destination="aUU-4y-uNi" eventType="touchUpInside" id="1sF-Az-SLt"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6o8-Gu-SLS">
+                                        <rect key="frame" x="0.0" y="312" width="300" height="40"/>
+                                        <color key="backgroundColor" red="0.79215686269999996" green="0.79215686269999996" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Get History Data">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="jQU-Lq-dct" kind="show" id="2ST-vk-IJr"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="8tj-ej-EGb" firstAttribute="height" secondItem="gd8-Od-GrI" secondAttribute="height" id="0Tt-2H-hel"/>
                                     <constraint firstItem="leo-HN-7VL" firstAttribute="width" secondItem="LBb-wi-p2o" secondAttribute="width" id="8u4-JJ-qwd"/>
+                                    <constraint firstItem="6o8-Gu-SLS" firstAttribute="height" secondItem="leo-HN-7VL" secondAttribute="height" id="I8C-UA-lOr"/>
                                     <constraint firstItem="Yzd-mb-TZd" firstAttribute="width" secondItem="r09-qi-qkL" secondAttribute="width" id="Inp-oz-s2J"/>
                                     <constraint firstItem="Yzd-mb-TZd" firstAttribute="height" secondItem="r09-qi-qkL" secondAttribute="height" id="OeN-4S-ASp"/>
                                     <constraint firstItem="gd8-Od-GrI" firstAttribute="width" secondItem="Yzd-mb-TZd" secondAttribute="width" id="RaU-OS-lWI"/>
@@ -152,6 +163,7 @@
                                     <constraint firstItem="leo-HN-7VL" firstAttribute="height" secondItem="LBb-wi-p2o" secondAttribute="height" id="cbZ-wN-SH6"/>
                                     <constraint firstItem="gd8-Od-GrI" firstAttribute="height" secondItem="Yzd-mb-TZd" secondAttribute="height" id="eJ7-Pv-fZE"/>
                                     <constraint firstItem="LBb-wi-p2o" firstAttribute="width" secondItem="8tj-ej-EGb" secondAttribute="width" id="fgU-S7-PVd"/>
+                                    <constraint firstItem="6o8-Gu-SLS" firstAttribute="width" secondItem="leo-HN-7VL" secondAttribute="width" id="mTM-Ta-Q1j"/>
                                     <constraint firstItem="r09-qi-qkL" firstAttribute="width" secondItem="tCn-It-KKp" secondAttribute="width" id="md3-hV-Ayg"/>
                                     <constraint firstItem="LBb-wi-p2o" firstAttribute="height" secondItem="8tj-ej-EGb" secondAttribute="height" id="n1q-wR-5xy"/>
                                 </constraints>
@@ -206,6 +218,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WAl-KN-3j1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3023" y="302"/>
+        </scene>
+        <!--History DataVC-->
+        <scene sceneID="bRt-zG-puw">
+            <objects>
+                <tableViewController id="jQU-Lq-dct" customClass="HistoryDataVC" customModule="limabandsdk_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="GPy-7v-iUs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="qq2-wQ-gEH" detailTextLabel="ekN-9o-5PF" style="IBUITableViewCellStyleValue1" id="c4N-Ap-3gg">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c4N-Ap-3gg" id="9yq-Sw-wUv">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qq2-wQ-gEH">
+                                            <rect key="frame" x="15" y="12" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ekN-9o-5PF">
+                                            <rect key="frame" x="316" y="12" width="44" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="jQU-Lq-dct" id="MRg-eX-IO3"/>
+                            <outlet property="delegate" destination="jQU-Lq-dct" id="cmI-zt-mtV"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QtO-24-uCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3022" y="1068"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ADH-Id-LLl">

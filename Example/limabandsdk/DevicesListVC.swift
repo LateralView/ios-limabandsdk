@@ -16,6 +16,7 @@ class DevicesListVC: UITableViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        LimaBandClient.verbose = true
         loadDevices()
     }
 

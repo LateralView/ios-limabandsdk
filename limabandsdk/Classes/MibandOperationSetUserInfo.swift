@@ -64,6 +64,7 @@ class MibandOperationSetUserInfo: FitnessDeviceOperation
         if let characteristic = self.characteristic(serviceUUID: serviceUUID, UUID: characteristicUUID)
         {
             let uid     = Data([0xf6, 0xe4, 0x63, 0x5c])
+//            let uid     = Data([0xe2, 0x56, 0x34, 0x23])
             let gender  = Data([userInfo.gender == .male ? 1 : 0])
             let age     = Data([UInt8(userInfo.birthDate.yearsSince)])
             let height  = Data([UInt8(userInfo.height)])
