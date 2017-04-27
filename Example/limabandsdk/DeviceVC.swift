@@ -62,6 +62,15 @@ class DeviceVC: UIViewController
         })
     }
     
+    @IBAction func doSetDateTime(_ sender: Any)
+    {
+        fitnessDevice?.setDateTime.execute(handler: { (success) in
+            if (success) {
+                print ("Did set date and time successfully")
+            }
+        })
+    }
+    
     @IBAction func doSetUserInfo(_ sender: Any)
     {
         fitnessDevice?.userInfo = FitnessDeviceUserInfo(
