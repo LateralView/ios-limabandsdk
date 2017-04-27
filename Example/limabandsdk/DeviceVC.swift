@@ -71,6 +71,20 @@ class DeviceVC: UIViewController
         })
     }
     
+    @IBAction func doGetBatteryLevel(_ sender: Any)
+    {
+        if let op = fitnessDevice?.getBatteryLevel
+        {
+            op.execute(handler: { (success) in
+                
+                guard let batteryLevel = op.returnValue as? Int else {
+                    return
+                }
+                print ("Battery level is \(batteryLevel)")
+            })
+        }
+    }
+    
     @IBAction func doSetUserInfo(_ sender: Any)
     {
         fitnessDevice?.userInfo = FitnessDeviceUserInfo(

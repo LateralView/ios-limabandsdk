@@ -76,7 +76,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="tCn-It-KKp">
-                                <rect key="frame" x="37.5" y="116" width="300" height="248"/>
+                                <rect key="frame" x="37.5" y="116" width="300" height="300"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r09-qi-qkL">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
@@ -131,13 +131,25 @@
                                             <action selector="doSetDateTime:" destination="aUU-4y-uNi" eventType="touchUpInside" id="HmE-Zb-FIi"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="leo-HN-7VL">
+                                        <rect key="frame" x="0.0" y="260" width="300" height="40"/>
+                                        <color key="backgroundColor" red="0.79215686269999996" green="0.79215686269999996" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Get Battery Level">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="doGetBatteryLevel:" destination="aUU-4y-uNi" eventType="touchUpInside" id="1sF-Az-SLt"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="8tj-ej-EGb" firstAttribute="height" secondItem="gd8-Od-GrI" secondAttribute="height" id="0Tt-2H-hel"/>
+                                    <constraint firstItem="leo-HN-7VL" firstAttribute="width" secondItem="LBb-wi-p2o" secondAttribute="width" id="8u4-JJ-qwd"/>
                                     <constraint firstItem="Yzd-mb-TZd" firstAttribute="width" secondItem="r09-qi-qkL" secondAttribute="width" id="Inp-oz-s2J"/>
                                     <constraint firstItem="Yzd-mb-TZd" firstAttribute="height" secondItem="r09-qi-qkL" secondAttribute="height" id="OeN-4S-ASp"/>
                                     <constraint firstItem="gd8-Od-GrI" firstAttribute="width" secondItem="Yzd-mb-TZd" secondAttribute="width" id="RaU-OS-lWI"/>
                                     <constraint firstItem="8tj-ej-EGb" firstAttribute="width" secondItem="gd8-Od-GrI" secondAttribute="width" id="ZJF-DE-ywb"/>
+                                    <constraint firstItem="leo-HN-7VL" firstAttribute="height" secondItem="LBb-wi-p2o" secondAttribute="height" id="cbZ-wN-SH6"/>
                                     <constraint firstItem="gd8-Od-GrI" firstAttribute="height" secondItem="Yzd-mb-TZd" secondAttribute="height" id="eJ7-Pv-fZE"/>
                                     <constraint firstItem="LBb-wi-p2o" firstAttribute="width" secondItem="8tj-ej-EGb" secondAttribute="width" id="fgU-S7-PVd"/>
                                     <constraint firstItem="r09-qi-qkL" firstAttribute="width" secondItem="tCn-It-KKp" secondAttribute="width" id="md3-hV-Ayg"/>
