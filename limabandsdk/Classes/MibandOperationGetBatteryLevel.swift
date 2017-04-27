@@ -35,7 +35,13 @@ class MibandOperationGetBatteryLevel: FitnessDeviceOperation
     override func execute(handler: @escaping OperationHandler)
     {
         super.execute(handler: handler)
-        
+
+        guard fitnessDevice.isConnected else {
+            print("- Cannot perform action because it is disconnected")
+            handler(false)
+            return;
+        }
+
         print("- Getting battery level")
         if let characteristic = self.characteristic(serviceUUID: serviceUUID, UUID: characteristicUUID)
         {

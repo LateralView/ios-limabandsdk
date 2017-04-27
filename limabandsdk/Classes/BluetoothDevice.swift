@@ -17,7 +17,7 @@ public class BluetoothDevice
     var centralManager  : CBCentralManager
     var peripheral      : CBPeripheral
     
-    var identifier      : String {
+    public var identifier      : String {
         return peripheral.identifier.uuidString
     }
     

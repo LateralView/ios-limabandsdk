@@ -9,14 +9,22 @@
 import Foundation
 import CoreBluetooth
 
-typealias ServiceScanHandler = (Void) -> Void
+typealias ServiceScanHandler = (_ success: Bool) -> Void
 
 public class FitnessDevice: NSObject, CBPeripheralDelegate
 {
     public var deviceInfo  : FitnessDeviceInfo?
     public var userInfo    : FitnessDeviceUserInfo?
 
-    var device      : BluetoothDevice
+    var device          : BluetoothDevice
+    var isConnected     = false {
+        didSet {
+            if !isConnected {
+                disconnect()
+            }
+        }
+    }
+    
     var operations  = [FitnessDeviceOperationType: FitnessDeviceOperation]()
     
     var identifier : String {
@@ -25,11 +33,7 @@ public class FitnessDevice: NSObject, CBPeripheralDelegate
 
     var deviceName  : String {
         return "Unknown"
-    }
-    
-    var isConnected     : Bool {
-        return device.peripheral.state == .connected
-    }
+    }    
     
     private var serviceScanHandler      : ServiceScanHandler?
     private var remainingServicesToScan : Int = 0
@@ -45,9 +49,9 @@ public class FitnessDevice: NSObject, CBPeripheralDelegate
     
     func scan(_ handler: @escaping ServiceScanHandler)
     {
-        guard isConnected else {
+        guard device.peripheral.state == .connected else {
             print("- Cannot scan because it is disconnected")
-            handler()
+            handler(false)
             return;
         }
         
@@ -58,9 +62,14 @@ public class FitnessDevice: NSObject, CBPeripheralDelegate
     
     func disconnect()
     {
+        // cancelling all ongoing operations
+        operations.values.forEach { (operation) in
+            operation.cancel(handler: { _ in })
+        }
     }
     
     // MARK: - CBPeripheralDelegate
+    
     
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?)
     {
@@ -79,7 +88,7 @@ public class FitnessDevice: NSObject, CBPeripheralDelegate
             // scanning of services and characteristics has ended
             // we are ready to use the device
             print("- Scan complete")
-            self.serviceScanHandler?()
+            self.serviceScanHandler?(true)
             self.serviceScanHandler = nil
         }
     }

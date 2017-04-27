@@ -18,6 +18,7 @@ protocol FitnessDeviceManagerDelegate: class
 
 class FitnessDeviceManager: NSObject, CBCentralManagerDelegate
 {
+
     let rssiFilterValue             = -70.0
     
     weak var delegate               : FitnessDeviceManagerDelegate?
@@ -84,8 +85,13 @@ class FitnessDeviceManager: NSObject, CBCentralManagerDelegate
     
     func centralManagerDidUpdateState(_ central: CBCentralManager)
     {
-        if central.state != .poweredOn {
-            self.fitnessDevice?.disconnect()
+        guard let device = fitnessDevice else {
+            return
+        }
+
+        if (central.state != .poweredOn) && device.isConnected {
+            print("- Bluetooth turned off, peripheral was disconnected")
+            fitnessDevice?.isConnected = false
         }
     }
     
@@ -139,14 +145,29 @@ class FitnessDeviceManager: NSObject, CBCentralManagerDelegate
             let fitnessDevice = FitnessDeviceFactory.createFitnessDevice(fromBluetoothDevice: bluetoothDevice)
         {
             self.fitnessDevice = fitnessDevice
+            fitnessDevice.isConnected = true
             print("- Connected to \(peripheral.identifier)")
             
-            fitnessDevice.scan {
-                self.delegate?.didConnect(success: true, fitnessDevice: fitnessDevice)
+            fitnessDevice.scan { success in
+                self.delegate?.didConnect(
+                    success: success,
+                    fitnessDevice: fitnessDevice
+                )
             }
             
         }
     }
     
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?)
+    {
+        guard let device = fitnessDevice else {
+            return
+        }
+        
+        if (peripheral == device.device.peripheral) && device.isConnected {
+            print("- Peripheral became disconnected")
+            fitnessDevice?.isConnected = false
+        }
+    }
     
 }

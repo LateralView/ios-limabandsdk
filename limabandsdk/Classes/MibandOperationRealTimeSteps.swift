@@ -30,6 +30,13 @@ class MibandOperationRealTimeSteps: FitnessDeviceOperation
     override func execute(handler: @escaping OperationHandler)
     {
         super.execute(handler: handler)
+
+        guard fitnessDevice.isConnected else {
+            print("- Cannot perform action because it is disconnected")
+            handler(false)
+            return;
+        }
+
         print("- Starting monitoring of real time steps values")
         if let characteristic = self.characteristic(serviceUUID: serviceUUID, UUID: characteristicUUID)
         {
@@ -41,6 +48,11 @@ class MibandOperationRealTimeSteps: FitnessDeviceOperation
     override func cancel(handler: @escaping OperationHandler)
     {
         super.cancel(handler: handler)
+        
+        guard fitnessDevice.isConnected else {
+            return;
+        }
+
         print("- Stopping monitoring of real time steps values")
         if let characteristic = self.characteristic(serviceUUID: serviceUUID, UUID: characteristicUUID)
         {

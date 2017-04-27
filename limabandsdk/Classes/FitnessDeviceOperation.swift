@@ -33,17 +33,12 @@ public class FitnessDeviceOperation
     
     public func execute(handler: @escaping OperationHandler)
     {
-        guard fitnessDevice.isConnected else {
-            print("- Cannot perform action because it is disconnected")
-            handler(false)
-            return;
-        }
-        
         self.handler = handler
     }
     
     public func cancel(handler: @escaping OperationHandler)
     {
+        self.handler?(false)
         self.handler = nil
     }
 

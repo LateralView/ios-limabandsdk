@@ -17,6 +17,12 @@ class MibandOperationVibrate: FitnessDeviceOperation
     {
         super.execute(handler: handler)
         
+        guard fitnessDevice.isConnected else {
+            print("- Cannot perform action because it is disconnected")
+            handler(false)
+            return;
+        }
+
         print("- Vibrating wristband")
         if let characteristic = self.characteristic(serviceUUID: serviceUUID, UUID: characteristicUUID)
         {

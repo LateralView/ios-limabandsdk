@@ -21,7 +21,7 @@ class DeviceVC: UIViewController
                 
                 if let fitnessDevice = fitnessDevice
                 {
-                    print("Connected to fitness device")
+                    print("- Connected to fitness device")
                     self.fitnessDevice = fitnessDevice
                 }
         }
@@ -38,7 +38,9 @@ class DeviceVC: UIViewController
     @IBAction func doVibrate(_ sender: Any)
     {
         fitnessDevice?.vibrate.execute(handler: { (success) in
-            print("Wristband just vibrated!")
+            if success {
+                print("Wristband just vibrated!")
+            }
         })
     }
     
@@ -61,7 +63,9 @@ class DeviceVC: UIViewController
         )
         
         fitnessDevice?.setUserInfo.execute(handler: { (success) in
-            print("Did Set User Info")
+            if success {
+                print("User Information has been set successfully")
+            }
         })
     }
 }

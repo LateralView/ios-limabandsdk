@@ -51,8 +51,14 @@ class MibandOperationSetUserInfo: FitnessDeviceOperation
     {
         super.execute(handler: handler)
         
+        guard fitnessDevice.isConnected else {
+            print("- Cannot perform action because it is disconnected")
+            handler(false)
+            return;
+        }
+
         guard let userInfo = fitnessDevice.userInfo else {
-            print("- Cannot set user information because it was not set")
+            print("- Before calling this operation you need to set FitnessDevice.userInfo")
             return
         }
         
