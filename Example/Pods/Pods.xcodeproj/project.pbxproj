@@ -86,7 +86,7 @@
 		836167911EB127E9005DF8BE /* MibandDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8361676E1EB127B7005DF8BE /* MibandDevice.swift */; };
 		836167921EB127E9005DF8BE /* MibandDeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8361676F1EB127B7005DF8BE /* MibandDeviceInfo.swift */; };
 		836167931EB127E9005DF8BE /* MibandExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836167701EB127B7005DF8BE /* MibandExtensions.swift */; };
-		836167941EB127E9005DF8BE /* MibandOperationGetActivityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836167711EB127B7005DF8BE /* MibandOperationGetActivityData.swift */; };
+		836167941EB127E9005DF8BE /* MibandOperationGetHistoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836167711EB127B7005DF8BE /* MibandOperationGetHistoryData.swift */; };
 		836167951EB127E9005DF8BE /* MibandOperationGetBatteryLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836167721EB127B7005DF8BE /* MibandOperationGetBatteryLevel.swift */; };
 		836167961EB127E9005DF8BE /* MibandOperationGetDeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836167731EB127B7005DF8BE /* MibandOperationGetDeviceInfo.swift */; };
 		836167971EB127E9005DF8BE /* MibandOperationPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836167741EB127B7005DF8BE /* MibandOperationPair.swift */; };
@@ -96,6 +96,7 @@
 		8361679B1EB127E9005DF8BE /* MibandOperationVibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836167781EB127B7005DF8BE /* MibandOperationVibrate.swift */; };
 		8361679E1EB12821005DF8BE /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8361679C1EB1281E005DF8BE /* BluetoothManager.swift */; };
 		836167A11EB12888005DF8BE /* LimaExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8361679F1EB1286E005DF8BE /* LimaExtensions.swift */; };
+		83FF5A901EB260A100045B30 /* FitnessDeviceOperationGetHistoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833349FD1EB25ED10060E0EC /* FitnessDeviceOperationGetHistoryData.swift */; };
 		841FF232C33C7D49C58CEFDBE7EEB92B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8A1A22C7E398DB624857B13B210136 /* UIKit.framework */; };
 		8507F4BF7437EB40A3626EDCC68BFF6D /* Contain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006ED45CA89BF1184872D135803B008C /* Contain.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		8654571F855691C23B7B8E61B2141944 /* EndWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FEA4B7E2BD931E1785D5FC2F9A67DE9 /* EndWith.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -326,6 +327,7 @@
 		7EF60AC0AF9A8589E5BD931EAC70C737 /* World.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = World.swift; path = Sources/Quick/World.swift; sourceTree = "<group>"; };
 		814044D9DC540957290C399CB1D970D1 /* FBSnapshotTestCase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSnapshotTestCase.h; path = FBSnapshotTestCase/FBSnapshotTestCase.h; sourceTree = "<group>"; };
 		820F9D392E1638DA2DC01DFEECAE0400 /* NMBStringify.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMBStringify.m; path = Sources/NimbleObjectiveC/NMBStringify.m; sourceTree = "<group>"; };
+		833349FD1EB25ED10060E0EC /* FitnessDeviceOperationGetHistoryData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessDeviceOperationGetHistoryData.swift; sourceTree = "<group>"; };
 		8345849CAFBED9EEDE92E26A20C0A6F5 /* mach_excServer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = mach_excServer.h; path = Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/mach_excServer.h; sourceTree = "<group>"; };
 		8361675C1EB1278F005DF8BE /* FitnessDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessDevice.swift; sourceTree = "<group>"; };
 		8361675D1EB1278F005DF8BE /* FitnessDeviceDummyOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessDeviceDummyOperation.swift; sourceTree = "<group>"; };
@@ -340,7 +342,7 @@
 		8361676E1EB127B7005DF8BE /* MibandDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MibandDevice.swift; sourceTree = "<group>"; };
 		8361676F1EB127B7005DF8BE /* MibandDeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MibandDeviceInfo.swift; sourceTree = "<group>"; };
 		836167701EB127B7005DF8BE /* MibandExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MibandExtensions.swift; sourceTree = "<group>"; };
-		836167711EB127B7005DF8BE /* MibandOperationGetActivityData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MibandOperationGetActivityData.swift; sourceTree = "<group>"; };
+		836167711EB127B7005DF8BE /* MibandOperationGetHistoryData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MibandOperationGetHistoryData.swift; sourceTree = "<group>"; };
 		836167721EB127B7005DF8BE /* MibandOperationGetBatteryLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MibandOperationGetBatteryLevel.swift; sourceTree = "<group>"; };
 		836167731EB127B7005DF8BE /* MibandOperationGetDeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MibandOperationGetDeviceInfo.swift; sourceTree = "<group>"; };
 		836167741EB127B7005DF8BE /* MibandOperationPair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MibandOperationPair.swift; sourceTree = "<group>"; };
@@ -649,7 +651,7 @@
 				8361676E1EB127B7005DF8BE /* MibandDevice.swift */,
 				8361676F1EB127B7005DF8BE /* MibandDeviceInfo.swift */,
 				836167701EB127B7005DF8BE /* MibandExtensions.swift */,
-				836167711EB127B7005DF8BE /* MibandOperationGetActivityData.swift */,
+				836167711EB127B7005DF8BE /* MibandOperationGetHistoryData.swift */,
 				836167721EB127B7005DF8BE /* MibandOperationGetBatteryLevel.swift */,
 				836167731EB127B7005DF8BE /* MibandOperationGetDeviceInfo.swift */,
 				836167741EB127B7005DF8BE /* MibandOperationPair.swift */,
@@ -903,6 +905,7 @@
 				8361675F1EB1278F005DF8BE /* FitnessDeviceInfo.swift */,
 				836167601EB1278F005DF8BE /* FitnessDeviceManager.swift */,
 				836167611EB1278F005DF8BE /* FitnessDeviceOperation.swift */,
+				833349FD1EB25ED10060E0EC /* FitnessDeviceOperationGetHistoryData.swift */,
 				836167621EB1278F005DF8BE /* FitnessDeviceOperations.swift */,
 				836167631EB1278F005DF8BE /* FitnessDeviceUserInfo.swift */,
 			);
@@ -1276,7 +1279,7 @@
 				836167901EB127E1005DF8BE /* FitnessDeviceUserInfo.swift in Sources */,
 				8361678B1EB127E1005DF8BE /* FitnessDeviceFactory.swift in Sources */,
 				8361678D1EB127E1005DF8BE /* FitnessDeviceManager.swift in Sources */,
-				836167941EB127E9005DF8BE /* MibandOperationGetActivityData.swift in Sources */,
+				836167941EB127E9005DF8BE /* MibandOperationGetHistoryData.swift in Sources */,
 				8361678A1EB127E1005DF8BE /* FitnessDeviceDummyOperation.swift in Sources */,
 				836167911EB127E9005DF8BE /* MibandDevice.swift in Sources */,
 				8361679E1EB12821005DF8BE /* BluetoothManager.swift in Sources */,
@@ -1292,6 +1295,7 @@
 				836167961EB127E9005DF8BE /* MibandOperationGetDeviceInfo.swift in Sources */,
 				836167981EB127E9005DF8BE /* MibandOperationRealTimeSteps.swift in Sources */,
 				8361678C1EB127E1005DF8BE /* FitnessDeviceInfo.swift in Sources */,
+				83FF5A901EB260A100045B30 /* FitnessDeviceOperationGetHistoryData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

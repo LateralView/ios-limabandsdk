@@ -13,8 +13,8 @@ public typealias OperationHandler = (_ success: Bool) -> Void
 
 public class FitnessDeviceOperation
 {
-    public var returnValue: Any?
-
+    public var returnInt: Int?
+    
     var fitnessDevice: FitnessDevice
     var handler: OperationHandler!
     

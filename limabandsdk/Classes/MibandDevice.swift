@@ -24,7 +24,7 @@ class MibandDevice: FitnessDevice
         self.operations[.getDeviceInfo] = MibandOperationGetDeviceInfo(fitnessDevice: self)
         self.operations[.setUserInfo] = MibandOperationSetUserInfo(fitnessDevice: self)
         self.operations[.setDateTime] = MibandOperationSetDateTime(fitnessDevice: self)
-        self.operations[.getHistoryData] = MibandOperationGetActivityData(fitnessDevice: self)
+        self.operations[.getHistoryData] = MibandOperationGetHistoryData(fitnessDevice: self)
         self.operations[.getRealTimeStepValues] = MibandOperationRealTimeSteps(fitnessDevice: self)
         self.operations[.getBatteryLevel] = MibandOperationGetBatteryLevel(fitnessDevice: self)
     }

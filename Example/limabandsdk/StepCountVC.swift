@@ -19,7 +19,7 @@ class StepCountVC: UIViewController
     {
         let op = fitnessDevice.getRealTimeStepValues
         op.execute { (success) in
-            if let value = op.returnValue {
+            if let value = op.returnInt {
                 self.stepCount.text = "\(value)"
             }
         }

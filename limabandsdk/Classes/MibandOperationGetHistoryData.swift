@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MibandOperationGetActivityData: FitnessDeviceOperation
+class MibandOperationGetHistoryData: FitnessDeviceOperationGetHistoryData
 {
     let serviceUUID                     = "FEE0"
     let activityCharacteristicUUID      = "FF07"
@@ -16,7 +16,7 @@ class MibandOperationGetActivityData: FitnessDeviceOperation
     
     private var activityData                 : Data?
     private var activityDataReferenceDate    : Date?
-    private var activityDataSummary          : [String: Int]?
+    private var activityDataSummary          : HistoryData?
     private var activityDataBytesTransferred : Int = 0
     
     override func received(data: Data, fromCharacteristicUUID: String)
@@ -47,7 +47,7 @@ class MibandOperationGetActivityData: FitnessDeviceOperation
         if let activityDataChar = self.characteristic(serviceUUID: serviceUUID, UUID: activityCharacteristicUUID),
             let controlPointChar = self.characteristic(serviceUUID: serviceUUID, UUID: controlPointCharacteristicUUID)
         {
-            activityDataSummary = [String: Int]()
+            activityDataSummary = HistoryData()
             peripheral.setNotifyValue(true, for: activityDataChar)
             self.peripheral.writeValue(Data([0x06]), for: controlPointChar, type: .withResponse)
         }
@@ -99,9 +99,9 @@ class MibandOperationGetActivityData: FitnessDeviceOperation
             // this means we have read all available data, we should submit the summary
             activityData = nil
             activityDataReferenceDate = nil
-            if let summary = activityDataSummary {
-                
-                self.returnValue = summary
+            if let summary = activityDataSummary
+            {
+                self.historyData = summary
                 self.handler?(true)
                 self.handler = nil
             }
@@ -127,14 +127,18 @@ class MibandOperationGetActivityData: FitnessDeviceOperation
         
         let readingPeriodInSeconds : TimeInterval = 60
         
+        let df = DateFormatter()
+        df.dateFormat = "yyyyMMdd"
+        
         for i in stride(from:0, to: data.count, by: 3) {
             //            let category : UInt8 = data.scanValue(start: i, length: 1)
             //            let intensity : UInt8 = data.scanValue(start: i+1, length: 1)
             let steps : UInt8 = data.scanValue(start: i+2, length: 1)
-            let dateString = timestamp.simple
-                        
-            let previousValue = activityDataSummary![dateString] ?? 0
-            activityDataSummary![dateString] = previousValue + Int(steps)
+            
+            let strippedTimeStamp = df.date(from: df.string(from: timestamp))!
+            
+            let previousValue = activityDataSummary![strippedTimeStamp] ?? 0
+            activityDataSummary![strippedTimeStamp] = previousValue + Int(steps)
             
             timestamp = timestamp.addingTimeInterval(readingPeriodInSeconds)
         }

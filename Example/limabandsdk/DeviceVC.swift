@@ -81,7 +81,7 @@ class DeviceVC: UIViewController
         {
             op.execute(handler: { (success) in
                 
-                guard let batteryLevel = op.returnValue as? Int else {
+                guard let batteryLevel = op.returnInt else {
                     return
                 }
                 print ("Battery level is \(batteryLevel)")

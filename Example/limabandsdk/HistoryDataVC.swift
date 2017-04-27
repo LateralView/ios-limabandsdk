@@ -13,18 +13,20 @@ class HistoryDataVC: UITableViewController
 {
     var fitnessDevice: FitnessDevice!
     
-    var historyData  : [String: Int]!
-    var sortedKeys   =  [String]()
+    var historyData  : HistoryData!
+    var sortedDates   =  [Date]()
     
     override func viewDidLoad() {
-        let op = fitnessDevice.getHistoryData
-        op.execute { (success) in
-            if success,
-                let data = op.returnValue as? [String: Int]
-            {
-                self.historyData = data
-                self.sortedKeys = self.historyData.keys.sorted()
-                self.tableView.reloadData()
+        if let op = fitnessDevice.getHistoryData
+        {
+            op.execute { (success) in
+                if success,
+                    let historyData = op.historyData
+                {
+                    self.historyData = historyData
+                    self.sortedDates = self.historyData.keys.sorted()
+                    self.tableView.reloadData()
+                }
             }
         }
     }
@@ -33,17 +35,20 @@ class HistoryDataVC: UITableViewController
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return sortedKeys.count
+        return sortedDates.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        let key = sortedKeys[indexPath.row]
-        let value = historyData[key]
+        let date = sortedDates[indexPath.row]
+        let value = historyData[date]
         
-        cell.textLabel?.text = key
+        let df = DateFormatter()
+        df.dateStyle = .short
+        
+        cell.textLabel?.text = df.string(from: date)
         cell.detailTextLabel?.text = "\(value!)"
         
         return cell

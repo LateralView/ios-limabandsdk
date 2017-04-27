@@ -23,7 +23,7 @@ class MibandOperationGetBatteryLevel: FitnessDeviceOperation
             let status : UInt8 = data.scanValue(start: 9, length: 1)
             LimaBandClient.log("Battery level:\(level), cycles:\(cycles), status:\(status)")
             
-            self.returnValue = Int(level)
+            self.returnInt = Int(level)
 
             self.handler?(true)
             self.handler = nil

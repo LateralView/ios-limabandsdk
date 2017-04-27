@@ -20,7 +20,7 @@ class MibandOperationRealTimeSteps: FitnessDeviceOperation
             // got a real time steps value
             let value : UInt32 = data.scanValue(start: 0, length: 4)
             LimaBandClient.log(" - Real time steps value: \(value)")
-            self.returnValue = Int(value)
+            self.returnInt = Int(value)
             self.handler?(true)
         }
     }

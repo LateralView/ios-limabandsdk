@@ -41,8 +41,9 @@ public extension FitnessDevice
         return operations[.setDateTime] ?? dummy
     }
     
-    public var getHistoryData: FitnessDeviceOperation {
-        return operations[.getHistoryData] ?? dummy
+    public var getHistoryData: FitnessDeviceOperationGetHistoryData? {
+        return operations[.getHistoryData] as? FitnessDeviceOperationGetHistoryData
+    
     }
     
     public var getRealTimeStepValues: FitnessDeviceOperation {
