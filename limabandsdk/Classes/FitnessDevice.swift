@@ -18,6 +18,14 @@ public class FitnessDevice: NSObject, CBPeripheralDelegate
     public var deviceInfo  : FitnessDeviceInfo?
     public var userInfo    : FitnessDeviceUserInfo?
 
+    public var identifier : String {
+        return device.identifier
+    }
+    
+    public var deviceName  : String {
+        return "Unknown"
+    }
+
     var device          : BluetoothDevice
     var isConnected     = false {
         didSet {
@@ -28,14 +36,6 @@ public class FitnessDevice: NSObject, CBPeripheralDelegate
     }
     
     var operations  = [FitnessDeviceOperationType: FitnessDeviceOperation]()
-    
-    var identifier : String {
-        return device.identifier
-    }
-
-    var deviceName  : String {
-        return "Unknown"
-    }    
     
     private var serviceScanHandler      : ServiceScanHandler?
     private var remainingServicesToScan : Int = 0
