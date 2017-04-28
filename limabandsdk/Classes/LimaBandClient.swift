@@ -69,7 +69,7 @@ public class LimaBandClient: FitnessDeviceManagerDelegate
     
     func didFind(success: Bool, devices: [BluetoothDevice])
     {
-        scanHandler?(true, devices)
+        scanHandler?(success, devices)
         scanHandler = nil
     }
     

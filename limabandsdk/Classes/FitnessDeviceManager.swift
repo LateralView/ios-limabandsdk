@@ -43,6 +43,7 @@ class FitnessDeviceManager: NSObject, CBCentralManagerDelegate
     {
         guard centralManager.state == .poweredOn else {
             LimaBandClient.error("Cannot find wristbands, bluetooth is in state \(centralManager.state.rawValue)")
+            self.delegate?.didFind(success: false, devices: [BluetoothDevice]() )
             return
         }
             
