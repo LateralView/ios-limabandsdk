@@ -37,9 +37,16 @@ class MibandDevice: FitnessDevice
                 // then get device information
                 self.getDeviceInfo.execute(handler: { (success) in
                     if success {
-                        // finally set user information
+                        // then set user information
                         self.setUserInfo.execute(handler: { (success) in
-                            handler(success)
+                            if success {
+                                // finally set date time
+                                self.setDateTime.execute(handler: { (success) in
+                                    handler(success)
+                                })
+                            } else {
+                                handler(success) // due to failed set user info
+                            }
                         })
                     } else {
                         handler(false) // due to bad get device info
