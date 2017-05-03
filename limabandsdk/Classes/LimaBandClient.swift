@@ -19,7 +19,7 @@ public class LimaBandClient: FitnessDeviceManagerDelegate
     
     private var manager         : FitnessDeviceManager!
 
-    var isBluetoothAvailable : Bool {
+    public var isBluetoothAvailable : Bool {
         return manager.isBluetoothAvailable
     }
 
