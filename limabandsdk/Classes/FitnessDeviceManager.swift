@@ -20,6 +20,8 @@ class FitnessDeviceManager: NSObject, CBCentralManagerDelegate
 {
 
     let rssiFilterValue             = -70.0
+    let centralManagerIdentifier    = "myCentralManagerIdentifier"
+
     
     weak var delegate               : FitnessDeviceManagerDelegate?
     var fitnessDevice               : FitnessDevice?
@@ -35,7 +37,12 @@ class FitnessDeviceManager: NSObject, CBCentralManagerDelegate
     override init()
     {
         super.init()
-        self.centralManager = BluetoothManager(delegate: self, queue: nil, options: nil)
+        self.centralManager = BluetoothManager(
+            delegate: self,
+            queue: nil,
+            options: [CBCentralManagerOptionRestoreIdentifierKey: centralManagerIdentifier]
+        )
+        
         self.centralManager.delegate = self
     }
     
@@ -169,6 +176,16 @@ class FitnessDeviceManager: NSObject, CBCentralManagerDelegate
             LimaBandClient.log("Peripheral became disconnected")
             fitnessDevice?.isConnected = false
         }
+    }
+    
+    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any])
+    {
+        NSLog("Restoring central manager state")
+//        if let peripherals = dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral] {
+//            let peripheral = peripherals.first
+//            
+//        }
+        
     }
     
 }

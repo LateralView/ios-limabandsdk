@@ -11,16 +11,19 @@ import limabandsdk
 
 class StepCountVC: UIViewController
 {
-    var fitnessDevice: FitnessDevice!
-    
     @IBOutlet weak var stepCount: UILabel!
+
+    var fitnessDevice: FitnessDevice!
+    var dailyGoalLastNotification : Date?
+
     
     override func viewWillAppear(_ animated: Bool)
     {
         let op = fitnessDevice.getRealTimeStepValues
         op.execute { (success) in
-            if let value = op.returnInt {
-                self.stepCount.text = "\(value)"
+            if let stepCount : Int = op.returnInt {
+                self.stepCount.text = "\(stepCount)"
+                self.checkDailyGoal(stepCount: stepCount)
             }
         }
     }
@@ -29,6 +32,25 @@ class StepCountVC: UIViewController
     {
         let op = fitnessDevice.getRealTimeStepValues
         op.cancel { (success) in
+        }
+    }
+    
+    func checkDailyGoal(stepCount: Int)
+    {
+        let dailyGoal = 5800
+        
+        let goalSuccess = stepCount > dailyGoal
+        let now = Date()
+        if goalSuccess && (dailyGoalLastNotification == nil || dailyGoalLastNotification!.day != now.day)
+        {
+            dailyGoalLastNotification = now
+            let notification = UILocalNotification()
+            notification.fireDate = now
+            notification.alertBody = "You reached your daily goal of \(dailyGoal) steps!"
+            notification.alertAction = "Great!"
+            notification.soundName = UILocalNotificationDefaultSoundName
+            UIApplication.shared.scheduleLocalNotification(notification)
+            
         }
     }
     

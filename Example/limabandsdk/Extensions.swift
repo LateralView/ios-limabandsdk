@@ -19,3 +19,12 @@ extension UIViewController
     }
     
 }
+
+extension Date {
+
+    var day : Int {
+        let calendar = Calendar(identifier: .gregorian)
+        return calendar.component(.day, from: self)
+    }
+
+}
