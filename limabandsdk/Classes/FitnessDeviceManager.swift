@@ -13,7 +13,7 @@ protocol FitnessDeviceManagerDelegate: class
 {
     func didFind(success: Bool, devices: [BluetoothDevice])
     func didConnect(success: Bool, fitnessDevice: FitnessDevice?)
-    func didDisconnect()
+    func didDisconnect(fitnessDevice: FitnessDevice?)
 }
 
 class FitnessDeviceManager: NSObject, CBCentralManagerDelegate
@@ -175,6 +175,7 @@ class FitnessDeviceManager: NSObject, CBCentralManagerDelegate
         if (peripheral == device.device.peripheral) && device.isConnected {
             LimaBandClient.log("Peripheral became disconnected")
             fitnessDevice?.isConnected = false
+            delegate?.didDisconnect(fitnessDevice: fitnessDevice)
         }
     }
     

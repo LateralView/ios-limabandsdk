@@ -10,6 +10,7 @@ import Foundation
 
 public typealias ScanHandler       = (_ success: Bool, _ devices: [BluetoothDevice]?) -> Void
 public typealias ConnectHandler    = (_ success: Bool, _ fitnessDevice: FitnessDevice?) -> Void
+public typealias DisconnectHandler = (_ fitnessDevice: FitnessDevice?) -> Void
 
 public class LimaBandClient: FitnessDeviceManagerDelegate
 {
@@ -27,8 +28,9 @@ public class LimaBandClient: FitnessDeviceManagerDelegate
         return manager.fitnessDevice
     }
     
-    private var scanHandler     : ScanHandler?
-    private var connectHandler  : ConnectHandler?
+    private var scanHandler       : ScanHandler?
+    private var connectHandler    : ConnectHandler?
+    private var disconnectHandler : DisconnectHandler?
     
     private init()
     {
@@ -65,6 +67,11 @@ public class LimaBandClient: FitnessDeviceManagerDelegate
         manager.connect(toDevice: device)
     }
     
+    public func notifyDisconnection(handler: @escaping DisconnectHandler)
+    {
+        self.disconnectHandler = handler
+    }
+    
     // MARK: - FitnessDeviceManagerDelegate
     
     func didFind(success: Bool, devices: [BluetoothDevice])
@@ -79,10 +86,11 @@ public class LimaBandClient: FitnessDeviceManagerDelegate
         connectHandler = nil
     }
 
-    func didDisconnect()
+    func didDisconnect(fitnessDevice: FitnessDevice?)
     {
         scanHandler?(false, nil)
         scanHandler = nil
+        disconnectHandler?(fitnessDevice)
     }
 
 }

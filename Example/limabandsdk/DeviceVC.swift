@@ -20,6 +20,8 @@ class DeviceVC: UIViewController
     {
         stackView.isUserInteractionEnabled = false
         stackView.alpha = 0.3
+        
+        
         LimaBandClient.shared.connect(
             device: bluetoothDevice) { (success, fitnessDevice) in
                 
@@ -47,6 +49,27 @@ class DeviceVC: UIViewController
                     }
                 }
         }
+        
+        LimaBandClient.shared.notifyDisconnection { (fitnessDevice) in
+            
+            // band got disconnected
+            let alert = UIAlertController(
+                title: "Band disconnected",
+                message: "The wristband became disconnected",
+                preferredStyle: .alert
+            )
+            
+            alert.addAction(UIAlertAction(
+                title: "OK",
+                style: .default,
+                handler: { (action) in
+                    self.navigationController?.popViewController(animated: true)
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
