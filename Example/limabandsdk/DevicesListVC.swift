@@ -26,7 +26,9 @@ class DevicesListVC: UITableViewController {
     
     func loadDevices()
     {
-        LimaBandClient.shared.scan(filterBySignalLevel: false) { (success, devices) in
+        LimaBandClient.shared.rssiFilterValue = -80
+        
+        LimaBandClient.shared.scan(filterBySignalLevel: true) { (success, devices) in
             
             if let devices = devices {
                 self.devices = devices

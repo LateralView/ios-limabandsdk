@@ -28,6 +28,12 @@ public class LimaBandClient: FitnessDeviceManagerDelegate
         return manager.fitnessDevice
     }
     
+    public var rssiFilterValue: Double = -80.0 {
+        didSet {
+            manager.rssiFilterValue = rssiFilterValue
+        }
+    }
+    
     private var scanHandler       : ScanHandler?
     private var connectHandler    : ConnectHandler?
     private var disconnectHandler : DisconnectHandler?

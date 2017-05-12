@@ -19,7 +19,7 @@ protocol FitnessDeviceManagerDelegate: class
 class FitnessDeviceManager: NSObject, CBCentralManagerDelegate
 {
 
-    let rssiFilterValue             = -70.0
+    var rssiFilterValue             : Double = -80.0
     let centralManagerIdentifier    = "myCentralManagerIdentifier"
 
     
@@ -123,7 +123,7 @@ class FitnessDeviceManager: NSObject, CBCentralManagerDelegate
         let isValidDevice = (isConnectable == true) && isValidName && passesSignalFilter
         
         if isValidName && !passesSignalFilter {
-            LimaBandClient.log("Found \(peripheral.identifier.uuidString) but it is too far away (\(RSSI.doubleValue))")
+            LimaBandClient.log("Found \(peripheral.identifier.uuidString) but it is too far away (\(RSSI.doubleValue) with a filter value of \(rssiFilterValue))")
         }
         
         if isValidDevice {
