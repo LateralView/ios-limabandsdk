@@ -131,16 +131,64 @@ class MibandOperationGetHistoryData: FitnessDeviceOperationGetHistoryData
         df.dateFormat = "yyyyMMdd"
         
         for i in stride(from:0, to: data.count, by: 3) {
-            //            let category : UInt8 = data.scanValue(start: i, length: 1)
+            let category : Int8 = data.scanValue(start: i, length: 1)
             //            let intensity : UInt8 = data.scanValue(start: i+1, length: 1)
             let steps : UInt8 = data.scanValue(start: i+2, length: 1)
             
             let strippedTimeStamp = df.date(from: df.string(from: timestamp))!
             
-            let previousValue = activityDataSummary![strippedTimeStamp] ?? 0
-            activityDataSummary![strippedTimeStamp] = previousValue + Int(steps)
+            let dataKind = DataKindFor(value: category)
+            
+            if var previousEntry = activityDataSummary![strippedTimeStamp] {
+                
+                // there is already an entry for this timestamp
+                previousEntry.steps = previousEntry.steps + Int(steps)
+                previousEntry.dataKind = DataKindMax(
+                    a: previousEntry.dataKind,
+                    b: dataKind
+                )
+                activityDataSummary![strippedTimeStamp] = previousEntry
+                
+            } else {
+                
+                // this is the first entry for this timestamp
+                let entry = HistoryDataEntry(
+                    steps: Int(steps),
+                    dataKind: dataKind
+                )
+                
+                activityDataSummary![strippedTimeStamp] = entry
+            }
+            
             
             timestamp = timestamp.addingTimeInterval(readingPeriodInSeconds)
+        }
+    }
+    
+    private func DataKindFor(value: Int8) -> HistoryDataKind
+    {
+        switch value {
+        case 4:
+            return .deepSleep
+        case 5:
+            return .lightSleep
+        case -1:
+            return .activity
+        default:
+            return .notWearing
+        }
+    }
+
+    private func DataKindMax(a: HistoryDataKind, b: HistoryDataKind) -> HistoryDataKind
+    {
+        if (a == .deepSleep) || (b == .deepSleep) {
+            return .deepSleep
+        } else if (a == .lightSleep) || (b == .lightSleep) {
+            return .lightSleep
+        } else if (a == .activity) || (b == .activity) {
+            return .activity
+        } else {
+            return .notWearing
         }
     }
     

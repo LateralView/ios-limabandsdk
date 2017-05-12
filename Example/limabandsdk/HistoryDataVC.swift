@@ -43,13 +43,16 @@ class HistoryDataVC: UITableViewController
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
         let date = sortedDates[indexPath.row]
-        let value = historyData[date]
-        
         let df = DateFormatter()
         df.dateStyle = .short
-        
         cell.textLabel?.text = df.string(from: date)
-        cell.detailTextLabel?.text = "\(value!)"
+
+        if let value = historyData[date] {
+            
+            cell.detailTextLabel?.text = "Steps:\(value.steps)"
+        }
+        
+        
         
         return cell
     }
