@@ -60,7 +60,7 @@ class HistoryDataVC: UITableViewController
 
         if let value = historyData[date] {
             
-            cell.detailTextLabel?.text = "Steps:\(value.dailySteps)"
+            cell.detailTextLabel?.text = "Steps:\(value.dailySteps), Sleep:\(value.totalSlept)"
         }
         return cell
     }

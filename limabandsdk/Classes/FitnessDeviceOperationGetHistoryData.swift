@@ -8,11 +8,11 @@
 
 import Foundation
 
-public enum HistoryDataKind {
-    case deepSleep      // user was deeply asleep
-    case lightSleep     // user was lightly sleeping
-    case activity       // user was performing activity of some kind
-    case notWearing     // user was not wearing the band
+public enum HistoryDataKind: Int {
+    case notWearing = 0    // user was not wearing the band
+    case activity   = 1    // user was performing activity of some kind
+    case lightSleep = 2    // user was lightly sleeping
+    case deepSleep  = 3    // user was deeply asleep
 }
 
 public struct HistoryDataPartialEntry {
@@ -22,6 +22,7 @@ public struct HistoryDataPartialEntry {
 
 public struct HistoryDataEntry {
     public var dailySteps : Int
+    public var totalSlept : Int
     public var partials   : [Date: HistoryDataPartialEntry]
 }
 

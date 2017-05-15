@@ -19,6 +19,8 @@ class MibandOperationGetHistoryData: FitnessDeviceOperationGetHistoryData
     private var activityDataSummary          : HistoryData?
     private var activityDataBytesTransferred : Int = 0
     
+    private let partialBlockSizeInMinutes = 10
+    
     override func received(data: Data, fromCharacteristicUUID: String)
     {
         if fromCharacteristicUUID == activityCharacteristicUUID
@@ -101,7 +103,12 @@ class MibandOperationGetHistoryData: FitnessDeviceOperationGetHistoryData
             activityDataReferenceDate = nil
             if let summary = activityDataSummary
             {
-                self.historyData = summary
+                activityDataSummary = summary
+                self.calculateSleepTime()
+                self.historyData = activityDataSummary
+                
+//                print ("Data Summary: \(activityDataSummary)")
+                
                 self.handler?(true)
                 self.handler = nil
             }
@@ -147,6 +154,7 @@ class MibandOperationGetHistoryData: FitnessDeviceOperationGetHistoryData
             } else {
                 dayEntry = HistoryDataEntry(
                     dailySteps: 0,
+                    totalSlept: 0,
                     partials: [Date: HistoryDataPartialEntry]()
                 )
             }
@@ -157,8 +165,7 @@ class MibandOperationGetHistoryData: FitnessDeviceOperationGetHistoryData
             // the following will update partial (10 minute block) values
             
             df.dateFormat = "mm"
-            let blockSizeInMinutes = 10
-            let minuteBlock = Int(df.string(from: timestamp))! / blockSizeInMinutes
+            let minuteBlock = Int(df.string(from: timestamp))! / partialBlockSizeInMinutes
             df.dateFormat = "yyyyMMddHH"
             let partialTimestampString = df.string(from: timestamp)
             let minuteTimestampString = String(format:"%@%02d", partialTimestampString, minuteBlock * 10)
@@ -233,6 +240,27 @@ class MibandOperationGetHistoryData: FitnessDeviceOperationGetHistoryData
                 UInt8((byteCount >> 8) & 0xff)
                 ]))
             self.peripheral.writeValue(ackData, for: controlPointChar, type: .withResponse)
+        }
+    }
+    
+    private func calculateSleepTime()
+    {
+        if let summary = self.activityDataSummary {
+
+            summary.keys.forEach({ (timestamp) in
+                
+                var dataEntry = summary[timestamp]!
+                var sleptTime = 0
+                dataEntry.partials.forEach({ (key, partialEntry) in
+                    if (partialEntry.dataKind == .deepSleep) || (partialEntry.dataKind == .lightSleep)
+                    {
+                        sleptTime = sleptTime + partialBlockSizeInMinutes
+                    }
+                })
+                dataEntry.totalSlept = sleptTime
+                
+                self.activityDataSummary![timestamp] = dataEntry
+            })
         }
     }
     
