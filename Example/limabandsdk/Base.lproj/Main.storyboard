@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="UgB-kc-98e">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="UgB-kc-98e">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -219,7 +219,7 @@
             </objects>
             <point key="canvasLocation" x="3023" y="302"/>
         </scene>
-        <!--History DataVC-->
+        <!--Daily History Data-->
         <scene sceneID="bRt-zG-puw">
             <objects>
                 <tableViewController id="jQU-Lq-dct" customClass="HistoryDataVC" customModule="limabandsdk_Example" customModuleProvider="target" sceneMemberID="viewController">
@@ -251,6 +251,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="jYz-Uc-VSi" kind="show" identifier="toHistoryDataDetail" id="XDo-PR-t6H"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -258,10 +261,56 @@
                             <outlet property="delegate" destination="jQU-Lq-dct" id="cmI-zt-mtV"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Daily History Data" id="X2V-oa-BPy"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QtO-24-uCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3022" y="1068"/>
+            <point key="canvasLocation" x="2193" y="1063"/>
+        </scene>
+        <!--Detailed History Data-->
+        <scene sceneID="TTF-mV-HJE">
+            <objects>
+                <tableViewController id="jYz-Uc-VSi" customClass="HistoryDataDetailVC" customModule="limabandsdk_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="9e6-Ow-DlW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="0q9-L1-jkV" detailTextLabel="8iz-Sa-CBY" style="IBUITableViewCellStyleValue1" id="icd-aS-19U">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="icd-aS-19U" id="iwR-vY-fHy">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0q9-L1-jkV">
+                                            <rect key="frame" x="15" y="12" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8iz-Sa-CBY">
+                                            <rect key="frame" x="316" y="12" width="44" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="jYz-Uc-VSi" id="S0X-pI-KKS"/>
+                            <outlet property="delegate" destination="jYz-Uc-VSi" id="23e-WH-v5I"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Detailed History Data" id="CaD-6S-Naf"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IUO-Mr-RDm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3009" y="1064"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ADH-Id-LLl">

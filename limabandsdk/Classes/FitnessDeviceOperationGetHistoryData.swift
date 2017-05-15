@@ -15,9 +15,14 @@ public enum HistoryDataKind {
     case notWearing     // user was not wearing the band
 }
 
+public struct HistoryDataPartialEntry {
+    public var steps    : Int
+    public var dataKind : HistoryDataKind
+}
+
 public struct HistoryDataEntry {
-    public var steps: Int
-    public var dataKind: HistoryDataKind
+    public var dailySteps : Int
+    public var partials   : [Date: HistoryDataPartialEntry]
 }
 
 public typealias HistoryData = [Date: HistoryDataEntry]

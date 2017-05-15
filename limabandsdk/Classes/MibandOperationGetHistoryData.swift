@@ -128,39 +128,68 @@ class MibandOperationGetHistoryData: FitnessDeviceOperationGetHistoryData
         let readingPeriodInSeconds : TimeInterval = 60
         
         let df = DateFormatter()
-        df.dateFormat = "yyyyMMdd"
         
         for i in stride(from:0, to: data.count, by: 3) {
+            
+            // extract values from this byte sequence
             let category : Int8 = data.scanValue(start: i, length: 1)
             //            let intensity : UInt8 = data.scanValue(start: i+1, length: 1)
             let steps : UInt8 = data.scanValue(start: i+2, length: 1)
+
             
-            let strippedTimeStamp = df.date(from: df.string(from: timestamp))!
-            
-            let dataKind = DataKindFor(value: category)
-            
-            if var previousEntry = activityDataSummary![strippedTimeStamp] {
-                
-                // there is already an entry for this timestamp
-                previousEntry.steps = previousEntry.steps + Int(steps)
-                previousEntry.dataKind = DataKindMax(
-                    a: previousEntry.dataKind,
-                    b: dataKind
-                )
-                activityDataSummary![strippedTimeStamp] = previousEntry
-                
+            // find or create entry for this day
+            df.dateFormat = "yyyyMMdd"
+            let dayTimestampString = df.string(from: timestamp)
+            let dayTimestamp = df.date(from: dayTimestampString)!
+            var dayEntry : HistoryDataEntry
+            if let previous = activityDataSummary![dayTimestamp] {
+                dayEntry = previous
             } else {
-                
-                // this is the first entry for this timestamp
-                let entry = HistoryDataEntry(
-                    steps: Int(steps),
-                    dataKind: dataKind
+                dayEntry = HistoryDataEntry(
+                    dailySteps: 0,
+                    partials: [Date: HistoryDataPartialEntry]()
                 )
-                
-                activityDataSummary![strippedTimeStamp] = entry
             }
             
+            // update daily steps value
+            dayEntry.dailySteps = dayEntry.dailySteps + Int(steps)
             
+            // the following will update partial (10 minute block) values
+            
+            df.dateFormat = "mm"
+            let blockSizeInMinutes = 10
+            let minuteBlock = Int(df.string(from: timestamp))! / blockSizeInMinutes
+            df.dateFormat = "yyyyMMddHH"
+            let partialTimestampString = df.string(from: timestamp)
+            let minuteTimestampString = String(format:"%@%02d", partialTimestampString, minuteBlock * 10)
+            
+//            print("minuteTimestampString: \(minuteTimestampString)")
+            df.dateFormat = "yyyyMMddHHmm"
+            let minuteTimestamp = df.date(from: minuteTimestampString)!
+            
+            var partialEntry : HistoryDataPartialEntry
+            if let previous = dayEntry.partials[minuteTimestamp] {
+                partialEntry = previous
+            } else {
+                partialEntry = HistoryDataPartialEntry(
+                    steps: 0,
+                    dataKind: .notWearing
+                )
+            }
+            let dataKind = DataKindFor(value: category)
+            partialEntry.dataKind = DataKindMax(
+                a: dataKind,
+                b: partialEntry.dataKind
+            )
+            partialEntry.steps = partialEntry.steps + Int(steps)
+            
+            // update partial data in the daily entry
+            dayEntry.partials[minuteTimestamp] = partialEntry
+            
+            // finally update entry in the summary
+            activityDataSummary![dayTimestamp] = dayEntry
+            
+            // update timestamp to prepare for next block of data
             timestamp = timestamp.addingTimeInterval(readingPeriodInSeconds)
         }
     }

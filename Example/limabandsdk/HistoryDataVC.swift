@@ -31,6 +31,17 @@ class HistoryDataVC: UITableViewController
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if let vc = segue.destination as? HistoryDataDetailVC,
+            let indexPath = tableView.indexPathForSelectedRow
+        {
+            let key = self.sortedDates[indexPath.row]
+            let entry = historyData[key]
+            vc.entry = entry
+        }
+    }
+    
     // MARK: - UITableViewController
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -49,13 +60,12 @@ class HistoryDataVC: UITableViewController
 
         if let value = historyData[date] {
             
-            cell.detailTextLabel?.text = "Steps:\(value.steps)"
+            cell.detailTextLabel?.text = "Steps:\(value.dailySteps)"
         }
-        
-        
-        
         return cell
     }
+    
+    
     
 }
 
