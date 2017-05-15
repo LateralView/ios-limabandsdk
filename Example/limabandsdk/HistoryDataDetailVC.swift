@@ -38,7 +38,20 @@ class HistoryDataDetailVC: UITableViewController
         cell.textLabel?.text = df.string(from: key)
         
         let steps = partialEntry.steps
-        cell.detailTextLabel?.text = "Steps: \(steps)"
+        
+        let sleepType: String
+        switch partialEntry.dataKind {
+        case .activity:
+            sleepType = "Activity"
+        case .deepSleep:
+            sleepType = "Deep"
+        case .lightSleep:
+            sleepType = "Light"
+        case .notWearing:
+            sleepType = "Not wearing"
+        }
+        
+        cell.detailTextLabel?.text = "Steps: \(steps), Sleep:\(sleepType)"
         
         return cell
     }
