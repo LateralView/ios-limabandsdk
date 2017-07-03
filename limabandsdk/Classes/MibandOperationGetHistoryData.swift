@@ -75,7 +75,9 @@ class MibandOperationGetHistoryData: FitnessDeviceOperationGetHistoryData
         
         // counter of this data block
         let dataUntilNextHeader : UInt16 = (value.scanValue(start: 9, length: 1) & 0xFF) | ((value.scanValue(start: 10, length: 1) & 0xFF) << 8)
-        let fixedDataUntilNextHeader = dataUntilNextHeader * ((dataType == 1) ? 3 : 1);
+        
+        let dataSize = (dataType == 1) ? 3 : 1
+        let fixedDataUntilNextHeader = Int(dataUntilNextHeader) * dataSize;
         
         // we are starting a new block of data. Before that we process the previous one.
         if let previousData = activityData {
