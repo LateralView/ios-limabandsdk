@@ -1,11 +1,15 @@
 # Lima Band SDK
 
+<!--
 [![CI Status](http://img.shields.io/travis/leandrinux/limabandsdk.svg?style=flat)](https://travis-ci.org/leandrinux/limabandsdk)
 [![Version](https://img.shields.io/cocoapods/v/limabandsdk.svg?style=flat)](http://cocoapods.org/pods/limabandsdk)
 [![License](https://img.shields.io/cocoapods/l/limabandsdk.svg?style=flat)](http://cocoapods.org/pods/limabandsdk)
 [![Platform](https://img.shields.io/cocoapods/p/limabandsdk.svg?style=flat)](http://cocoapods.org/pods/limabandsdk)
+-->
 
 Lima Band SDK allows you to interact with Bluetooth wearable exercise bands, receive live step count values and historic data. Currently only Xiaomi Mi Band is supported.
+
+Please [check the documentation](DOCS.md) for more information about using this framework.
 
 ## Example App
 
